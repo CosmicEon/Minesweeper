@@ -3,5 +3,8 @@ class Board{
 
 	}
 
+	createBoard(){
+		
+	}
 	//TODO add methods, fields and properties
 }

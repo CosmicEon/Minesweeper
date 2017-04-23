@@ -3,5 +3,18 @@ class Timer{
 
 	}
 
+	startTimer(){
+
+	}
+
+	stopTimer(){
+
+	}
+
+	resetTimer(){
+
+	}
+
+	
 	//TODO add methods, fields and properties
 }
