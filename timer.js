@@ -15,6 +15,5 @@ class Timer{
 
 	}
 
-	
 	//TODO add methods, fields and properties
 }
