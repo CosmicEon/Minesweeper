@@ -1,4 +1,4 @@
-class Bomb extends Field{
+class Bomb /*extends Field*/{
 	constructor(){
 
 	}
