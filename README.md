@@ -1,5 +1,5 @@
 # Team-Avocado
-#### OOP project
+#### JavaScript Applications team project
 [Link to Assignment](https://github.com/TelerikAcademy/JavaScript-Applications/blob/master/Teamwork/README.md)
 
 ---
