@@ -33,10 +33,13 @@ class Board{
 
         var button = document.createElement('button');
         button.className = 'field';
-        td.appendChild(button);
+
+        var id = 0;
 
         for (var i = 0; i < this._cols; i += 1) {
             var col = td.cloneNode(true);
+            button.id = id;
+            id += 1;
         	tr.appendChild(col);
         }
 
