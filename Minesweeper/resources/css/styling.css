@@ -1,0 +1,13 @@
+.field {
+    width: 20px;
+    height: 20px;
+}
+
+.top-buffer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.contrainer-slt {
+    background-color: #D9E1E8;
+}
