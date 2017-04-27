@@ -2,11 +2,12 @@
 #### JavaScript Applications team project
 [Link to Assignment](https://github.com/TelerikAcademy/JavaScript-Applications/blob/master/Teamwork/README.md)
 
+
 ---
 **Team Members:**
-* angel75013 - Ангел
-* CosmicEon - Красен Илков
-* krisi0505 - Кристина Илиева
+* Kristina_Ilieva - Кристина Илиева
+* KraitynDeWas - Красен Илков
+* Angel1985 - Ангел
 
 
 ---
