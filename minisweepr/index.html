@@ -14,7 +14,6 @@
 
 <body>
     <div class="contrainer contrainer-slt">
-
         <div class="row">
             <div class="page-header text-center">
                 <h1>Minesweeper</h1>
@@ -30,7 +29,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 text-center top-buffer">
+            <div class="col-lg-3 col-md-3 col-md-offset-3 col-sm-6 col-sx-12 text-center top-buffer">
                 <div class="dropdown-container">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle btn-margin" type="button" data-toggle="dropdown">Choose difficulty<span class="caret"></span>
@@ -42,23 +41,25 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 text-center top-buffer">
-                    <div id="high-scores">HighScores</div>
-                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-sx-12 text-center">
+                <h4 id="high-scores">HighScores</h4>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 text-center">
-                <!--Board to be placed here-->
+                <h5 id="display-bomb-number">Number</h5>
+                <!--Board to be displayed here-->
                 <div id="table">
-                    <span id="display-bomb-number">Number</span>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="'game container">
+    <!--<div id="'game container">
         <span id="game options" class="inline">
         <a href="#/home">New Game</a>
     </span>
@@ -72,7 +73,7 @@
 
     </div>
 
-    <div id="high-scores">HighScores</div>
+    <div id="high-scores">HighScores</div>-->
 
     <script>
         System.import("main");
