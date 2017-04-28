@@ -1,9 +1,14 @@
 #high-scores {
     margin-top: 17px;
 }
+
 #table {
     background-color: #99acc6;
+    padding-top: 10px;
+    padding-bottom: 10px;    
+    margin-bottom: 20px;
 }
+
 .contrainer-slt {
     background-color: #D9E1E8;
 }
