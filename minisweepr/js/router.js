@@ -15,9 +15,9 @@ class MyRouter {
     navigate() {
         const currentUrl = location.hash.slice(1);
 
-        for(const {targetUrl, callback} of this._routes) {
+        for (const { targetUrl, callback } of this._routes) {
             const params = MyRouter.matchUrls(currentUrl, targetUrl);
-            if(params) {
+            if (params) {
                 callback(params);
                 break;
             }
@@ -28,16 +28,16 @@ class MyRouter {
         const currentUrlParts = currentUrl.split(/\//g);
         const targetUrlParts = targetUrl.split(/\//g);
 
-        if(targetUrlParts.length !== currentUrlParts.length) {
+        if (targetUrlParts.length !== currentUrlParts.length) {
             return false;
         }
 
         const params = {};
 
         const len = currentUrlParts.length;
-        for(let i = 0; i < len; i += 1) {
-            if(targetUrlParts[i][0] !== ':') {
-                if(currentUrlParts[i] !== targetUrlParts[i]) {
+        for (let i = 0; i < len; i += 1) {
+            if (targetUrlParts[i][0] !== ':') {
+                if (currentUrlParts[i] !== targetUrlParts[i]) {
                     return false;
                 }
             }

@@ -34,8 +34,8 @@ class Board {
             let $rowDiv = $('<div>');
             table[i] = new Array(tableColumns);
             for (var j = 0; j < tableColumns; j++) {
-                let $button =document.createElement('button');
-                $button.className='field';
+                let $button = document.createElement('button');
+                $button.className = 'field';
 
 
 
@@ -59,4 +59,4 @@ class Board {
     //TODO add methods, fields and properties
 }
 
-export {Board};
+export { Board };
