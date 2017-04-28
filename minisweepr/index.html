@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Minisweeper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Minesweeper</title>
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="js/system-config.js"></script>
-    <link rel="stylesheet" href="./css/styling.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/styling.css">
 </head>
+
 <body>
-<div id="'game container">
-    <span id="game options" class="inline">
+    <div id="'game container">
+        <span id="game options" class="inline">
         <a href="#/home">New Game</a>
     </span>
-    <ul id="options">
-        <li><a href="#/beginner">Easy</a></li>
-        <li><a href="#/intermediate">Medium</a></li>
-        <li><a href="#/expert">Hard</a></li>
-    </ul>
-    <span id="display" class="inline">Display</span>
-    <span id="'help" class="inline">Help</span>
-    <div id="table">
-        <span id="numberOfBombs">Number</span>
+        <ul id="options">
+            <li><a href="#/beginner">Easy</a></li>
+            <li><a href="#/intermediate">Medium</a></li>
+            <li><a href="#/expert">Hard</a></li>
+        </ul>
+        <span id="display" class="inline">Display</span>
+        <span id="'help" class="inline">Help</span>
+        <div id="table">
+            <span id="numberOfBombs">Number</span>
+        </div>
     </div>
-</div>
-<div id="HighScores">HighScores</div>
-<script>
-    System.import("main");
-</script>
 
+    <div id="HighScores">HighScores</div>
+
+    <script>
+        System.import("main");
+    </script>
+
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
