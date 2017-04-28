@@ -3,16 +3,16 @@ import { generateBombs } from '../bombs.js';
 
 
 function intermediateGame() {
-    var mediumTable=new Board(16,16);
+    var mediumTable = new Board(16, 16);
     mediumTable.createBoard();
-    let numberBombs=40;
-    let arrayOfBombs=generateBombs(mediumTable.numberElements,numberBombs);
+    let numberBombs = 40;
+    let arrayOfBombs = generateBombs(mediumTable.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
-        bomb.bomb=true;
+        bomb.bomb = true;
     }
 
-    $('#options').css("display","none");
+    $('#options').css("display", "none");
 
     $('button').on('click', function (ev) {
         console.log(ev.which);
@@ -20,17 +20,17 @@ function intermediateGame() {
         //3=right click
     });
     $('button').on('contextmenu', function (ev) {
-        let $target=$(ev.target);
+        let $target = $(ev.target);
         ev.preventDefault();//don't show context menu
         console.log(ev.which);
-        if($target.html()==='*'){
+        if ($target.html() === '*') {
             $target.html('');
             numberBombs++;
-            $('#numberOfBombs').html('Number of Bombs'+numberBombs);
+            $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         } else {
             $target.html('*');
             numberBombs--;
-            $('#numberOfBombs').html('Number of Bombs'+numberBombs);
+            $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         }
         //add Image Flag to button
         //think to simplifie,duplicate on each controller

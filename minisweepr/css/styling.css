@@ -1,11 +1,42 @@
-.field{
+.field {
     width: 20px;
     height: 20px;
 }
 
-.inline{
+.inline {
     display: inline-block;
 }
-.hide{
+
+.hide {
     display: none;
+}
+
+
+/*.top-buffer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}*/
+
+.contrainer-slt {
+    background-color: #D9E1E8;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    /* Bottom of button */
+    right: 0;
+}
+
+.btn-margin {
+    margin: 10px;
+}
+
+#high-scores {
+    display: inline-block;
+    width: 300px;
 }
