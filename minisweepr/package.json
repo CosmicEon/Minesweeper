@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "live-server" , 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server",
+    "test": "mocha -R spec tests"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "chai": "^3.5.0",
     "handlebars": "^4.0.6",
     "jquery": "^3.2.1",
     "live-server": "^1.2.0",
+    "mocha": "^3.3.0",
     "systemjs": "^0.20.12",
     "systemjs-plugin-babel": "0.0.21"
   }

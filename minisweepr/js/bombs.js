@@ -22,7 +22,9 @@ class Bomb {
         this._y = value;
     }
 }
+
 let arrayOfBombs = [];
+
 function generateBombs(array, numberOfBombs) {
 
     for (var i = 0; i < numberOfBombs; i++) {
@@ -37,4 +39,4 @@ function generateBombs(array, numberOfBombs) {
 
 
 }
-export {generateBombs};
+export { generateBombs };

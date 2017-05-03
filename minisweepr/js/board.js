@@ -24,17 +24,19 @@ class Board {
     }
 
     createBoard() {
-        let tableColumns = this._cols
+        let tableColumns = this._cols;
         let tableRows = this._rows;
         let table = new Array(tableRows);
         let $board = $('#table');
 
 
-        for (let i = 0; i < tableRows; i++) {
+        for (let y = 0; y < tableRows; y++) {
             let $rowDiv = $('<div>');
-            table[i] = new Array(tableColumns);
-            for (var j = 0; j < tableColumns; j++) {
+            table[y] = new Array(tableColumns);
+            for (let x = 0; x < tableColumns; x++) {
                 let $button = document.createElement('button');
+                $button.setAttribute('x', x);
+                $button.setAttribute('y', y);
                 $button.className = 'field';
 
 
@@ -42,10 +44,10 @@ class Board {
 
                 //set coordinates to button to indentifie each of them
 
-                $button.coordX = i;
-                $button.coordY = j;
+                $button.coordX = y;
+                $button.coordY = x;
                 $button.bomb = false;
-                table[i][j] = $button;
+                table[y][x] = $button;
                 this.numberElements.push($button);
                 $rowDiv.append($button);
 
