@@ -27,7 +27,8 @@ class Board {
         let tableColumns = this._cols;
         let tableRows = this._rows;
         let table = new Array(tableRows);
-        let $board = $('#table');
+
+        let $createdBoard=$('<div>');
 
 
         for (let y = 0; y < tableRows; y++) {
@@ -35,11 +36,7 @@ class Board {
             table[y] = new Array(tableColumns);
             for (let x = 0; x < tableColumns; x++) {
                 let $button = document.createElement('button');
-                $button.setAttribute('x', x);
-                $button.setAttribute('y', y);
                 $button.className = 'field';
-
-
 
 
                 //set coordinates to button to indentifie each of them
@@ -53,12 +50,13 @@ class Board {
 
 
             }
-            $board.append($rowDiv);
+            $createdBoard.append($rowDiv);
         }
+        return $createdBoard;
 
     }
 
     //TODO add methods, fields and properties
 }
 
-export { Board };
+export {Board};

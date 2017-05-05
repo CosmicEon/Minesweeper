@@ -3,16 +3,20 @@ import { generateBombs } from '../bombs.js';
 
 
 function expertGame() {
+    let $board = $('#table');
+    $board.empty();
     var bigBoard = new Board(16, 30);
-    bigBoard.createBoard();
+
+    $board.append( bigBoard.createBoard());
     let numberBombs = 99;
+    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let arrayOfBombs = generateBombs(bigBoard.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
     }
 
-    $('#options').css("display", "none");
+
 
     $('button').on('click', function (ev) {
         console.log(ev.which);
