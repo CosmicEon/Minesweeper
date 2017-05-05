@@ -15,7 +15,7 @@ function expertGame() {
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
     }
-
+    console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
 
