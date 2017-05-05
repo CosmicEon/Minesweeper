@@ -18,36 +18,32 @@ function beginnerGame() {
 
     console.log(arrayOfBombs);
 
-
-
     $('button').on('click', function (ev) {
-
-        if (ev.target.bomb === true) {
-            console.log('GAME OVER');
-            //to implement function end game
-        } else {
-            //show number - function
-        }
+        console.log(ev.which);
 
     });
     $('button').on('contextmenu', function (ev) {
+        let flag=$('<img>');
+        flag.attr('src','../flag.png');
+        flag.addClass('img');
+
         let $target = $(ev.target);
         ev.preventDefault();//don't show context menu
-        console.log(ev.which);
-        if ($target.html() === '*') {
-            $target.html('');
+
+        if ($target.hasClass('flag')) {
+            $target.removeClass('flag')
             numberBombs++;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         } else {
-            $target.html('*');
+
+            $target.addClass('flag');
+            // $target.html('*');
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         }
-        //add Image Flag to button
+
         //think to simplifie,duplicate on each controller
     });
-
-
 }
 
 export { beginnerGame };
