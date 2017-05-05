@@ -1,12 +1,12 @@
-import { Board } from '../board.js';
-import { generateBombs } from '../bombs.js';
+import {Board} from '../board.js';
+import {generateBombs} from '../bombs.js';
 
 
 function beginnerGame() {
     let $board = $('#table');
     $board.empty();
     var smallBoard = new Board(9, 9);
-    $board.append( smallBoard.createBoard());
+    $board.append(smallBoard.createBoard());
 
     let numberBombs = 10;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
@@ -14,21 +14,32 @@ function beginnerGame() {
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
+
+
     }
 
     console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
 
-        if(ev.target.bomb){
-            alert('game over');
+        if (ev.target.bomb) {
+           var show= function showBombs(){
+            for (var i = 0; i < arrayOfBombs.length; i++) {
+                arrayOfBombs[i].className+=' bomb';//not jquery object to use addClass
+
+            }};
+           show();
+            alert("Game Over");
         }
+
         console.log(ev.which);
 
     });
+
+
     $('button').on('contextmenu', function (ev) {
-        let flag=$('<img>');
-        flag.attr('src','../flag.png');
+        let flag = $('<img>');
+        flag.attr('src', '../flag.png');
         flag.addClass('img');
 
         let $target = $(ev.target);
@@ -48,7 +59,8 @@ function beginnerGame() {
 
         //think to simplifie,duplicate on each controller
     });
+
 }
 
-export { beginnerGame };
+export {beginnerGame}
 

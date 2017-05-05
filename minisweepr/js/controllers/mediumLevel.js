@@ -20,11 +20,20 @@ function intermediateGame() {
 
     $('button').on('click', function (ev) {
 
-        if(ev.target.bomb){
-            alert('game over');
+        if (ev.target.bomb) {
+            var show= function showBombs(){
+                for (var i = 0; i < arrayOfBombs.length; i++) {
+                    arrayOfBombs[i].className+=' bomb';//not jquery object to use addClass
+
+                }};
+            show();
+            alert("Game Over");
         }
-        console.log(ev.which)
+
+        console.log(ev.which);
+
     });
+
     $('button').on('contextmenu', function (ev) {
         let flag=$('<img>');
         flag.attr('src','../flag.png');
