@@ -16,7 +16,10 @@ router
     .on('/beginner', beginnerGame)
     .on('/intermediate', intermediateGame)
     .on('/expert', expertGame)
-    .on('/new-game', () => location.hash = '/beginner');//restart return to first page,see video
+    .on('/new-game', () => location.hash = '/beginner');//restartira tekushtata stranica
+//kogato se izbere nivo i se smeni na drugo bombite se zapazvat.
+//new game-restartira nivoto
+//logic da se zachistqt bombite
 
 
 $(window).on('load', () => router.navigate());

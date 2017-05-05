@@ -19,6 +19,10 @@ function beginnerGame() {
     console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
+
+        if(ev.target.bomb){
+            alert('game over');
+        }
         console.log(ev.which);
 
     });
