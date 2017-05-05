@@ -3,8 +3,11 @@ import { generateBombs } from '../bombs.js';
 
 
 function beginnerGame() {
+    let $board = $('#table');
+    $board.empty();
     var smallBoard = new Board(9, 9);
-    smallBoard.createBoard();
+    $board.append( smallBoard.createBoard());
+
     let numberBombs = 10;
     let arrayOfBombs = generateBombs(smallBoard.numberElements, numberBombs);
 
@@ -14,7 +17,7 @@ function beginnerGame() {
 
     console.log(arrayOfBombs);
 
-    $('#options').css("display", "none");
+
 
     $('button').on('click', function (ev) {
 

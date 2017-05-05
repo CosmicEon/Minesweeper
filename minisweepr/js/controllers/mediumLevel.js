@@ -3,8 +3,12 @@ import { generateBombs } from '../bombs.js';
 
 
 function intermediateGame() {
+    let $board = $('#table');
+    $board.empty();
     var mediumTable = new Board(16, 16);
-    mediumTable.createBoard();
+
+    $board.append( mediumTable.createBoard());
+
     let numberBombs = 40;
     let arrayOfBombs = generateBombs(mediumTable.numberElements, numberBombs);
 
@@ -12,7 +16,7 @@ function intermediateGame() {
         bomb.bomb = true;
     }
 
-    $('#options').css("display", "none");
+
 
     $('button').on('click', function (ev) {
         console.log(ev.which);

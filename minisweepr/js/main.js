@@ -11,7 +11,7 @@ router
     .on('/beginner', beginnerGame)
     .on('/intermediate', intermediateGame)
     .on('/expert', expertGame)
-    .on('/new-game', () => location.hash = '');//restart return to first page,see video
+    .on('/new-game', () => location.hash = '/beginner');//restart return to first page,see video
 
 
 $(window).on('load', () => router.navigate());
