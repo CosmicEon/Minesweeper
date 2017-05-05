@@ -7,7 +7,10 @@ import { Utilities } from './utilities.js';
 
 const router = new MyRouter();
 
-Utilities.facebookShare();
+// starts facebook sdk and twitter widget
+const shareUtilities = new Utilities();
+shareUtilities.facebookShare(document, 'script', 'facebook-jssdk');
+shareUtilities.twitterShare(document, "script", "twitter-wjs");
 
 router
     .on('/beginner', beginnerGame)
