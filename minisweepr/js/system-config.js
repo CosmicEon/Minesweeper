@@ -12,6 +12,7 @@ SystemJS.config({
         //scripts
         'router': './js/router.js',
         'tests': '../tests/tests.js',
+        'utilities': './utilities.js',
 
         //libraries
         'jquery': './node_modules/jquery/dist/jquery.min.js',

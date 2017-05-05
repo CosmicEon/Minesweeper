@@ -3,9 +3,11 @@ import 'jquery';
 import { beginnerGame } from './controllers/easyLevel.js';
 import { intermediateGame } from './controllers/mediumLevel.js';
 import { expertGame } from './controllers/hardLevel.js';
-
+import { Utilities } from './utilities.js';
 
 const router = new MyRouter();
+
+Utilities.facebookShare();
 
 router
     .on('/beginner', beginnerGame)
