@@ -15,11 +15,14 @@ function expertGame() {
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
     }
-
+    console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
-        console.log(ev.which);
 
+        if(ev.target.bomb){
+            alert('game over');
+        }
+        console.log(ev.which)
     });
     $('button').on('contextmenu', function (ev) {
         let flag=$('<img>');

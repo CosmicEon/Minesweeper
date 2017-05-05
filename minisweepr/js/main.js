@@ -19,6 +19,7 @@ router
     .on('/expert', expertGame)
     .on('/new-game', () => location.hash = '/beginner') //restart return to first page,see video
     .on('/help', () => help());
+//logic da se zachistqt bombite
 
 
 $(window).on('load', () => router.navigate());

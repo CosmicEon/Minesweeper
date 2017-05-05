@@ -26,7 +26,7 @@ class Bomb {
 let arrayOfBombs = [];
 
 function generateBombs(array, numberOfBombs) {
-
+    let arrayOfBombs= [];
     for (var i = 0; i < numberOfBombs; i++) {
         let index = Math.floor(Math.random() * array.length);
         let bomb = array[index];
@@ -39,4 +39,4 @@ function generateBombs(array, numberOfBombs) {
 
 
 }
-export { generateBombs };
+export {generateBombs};
