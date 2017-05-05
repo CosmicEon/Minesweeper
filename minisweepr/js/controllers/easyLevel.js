@@ -9,6 +9,7 @@ function beginnerGame() {
     $board.append( smallBoard.createBoard());
 
     let numberBombs = 10;
+    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let arrayOfBombs = generateBombs(smallBoard.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {

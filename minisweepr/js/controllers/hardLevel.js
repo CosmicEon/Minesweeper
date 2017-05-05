@@ -9,6 +9,7 @@ function expertGame() {
 
     $board.append( bigBoard.createBoard());
     let numberBombs = 99;
+    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let arrayOfBombs = generateBombs(bigBoard.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {

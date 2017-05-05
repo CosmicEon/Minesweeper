@@ -10,6 +10,7 @@ function intermediateGame() {
     $board.append( mediumTable.createBoard());
 
     let numberBombs = 40;
+    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let arrayOfBombs = generateBombs(mediumTable.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
