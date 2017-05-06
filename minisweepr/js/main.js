@@ -5,7 +5,7 @@ import { intermediateGame } from './controllers/mediumLevel.js';
 import { expertGame } from './controllers/hardLevel.js';
 import { Utilities } from './utilities.js';
 import { help } from './controllers/helpController.js';
-import {newGame} from './controllers/level.js';
+import { newGame } from './controllers/level.js';
 
 const router = new MyRouter();
 
