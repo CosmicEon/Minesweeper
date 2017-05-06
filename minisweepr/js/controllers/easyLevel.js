@@ -5,6 +5,8 @@ import { Events } from '../events.js';
 
 function beginnerGame() {
     let $board = $('#table');
+    let $timerContainer = $('.game-time span').empty();
+
     $board.empty();
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var smallBoard = new Board(9, 9);
@@ -105,7 +107,9 @@ function beginnerGame() {
         //think to simplifie,duplicate on each controller
     });
 
-
+    $(window).on('hashchange', function () {
+        events.stopTimer(); // stop the timer when page is changed
+    });
 }
 
 export { beginnerGame }

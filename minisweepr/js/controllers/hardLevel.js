@@ -5,6 +5,7 @@ import { Events } from '../events.js';
 
 function expertGame() {
     let $board = $('#table');
+    let $timerContainer = $('.game-time span').empty();
     $board.empty();
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var bigBoard = new Board(16, 30);
@@ -101,6 +102,10 @@ function expertGame() {
         }
 
         //think to simplifie,duplicate on each controller
+    });
+
+    $(window).on('hashchange', function () {
+        events.stopTimer(); // stop the timer when page is changed
     });
 }
 

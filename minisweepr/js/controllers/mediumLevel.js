@@ -103,6 +103,10 @@ function intermediateGame() {
 
         //think to simplifie,duplicate on each controller
     });
+
+    $(window).on('hashchange', function () {
+        events.stopTimer(); // stop the timer when page is changed
+    });
 }
 
 export { intermediateGame };
