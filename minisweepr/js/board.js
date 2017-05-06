@@ -31,12 +31,13 @@ class Board {
 
 
         for (let y = 0; y < tableRows; y++) {
-            let $rowDiv = $('<div>');
+            let $rowDiv = $('<div>').addClass('row');
             table[y] = new Array(tableColumns);
             for (let x = 0; x < tableColumns; x++) {
                 let $button = document.createElement('button');
-                $button.className = 'field';
-
+                $button.className = 'btn-default field';
+                $button.setAttribute('y', y);
+                $button.setAttribute('x', x);
 
                 //set coordinates to button to indentifie each of them
 

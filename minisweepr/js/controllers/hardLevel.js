@@ -14,7 +14,7 @@ function expertGame() {
     let numberBombs = 99;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let newBombs = new Bombs();
-    let arrayOfBombs = newBombs.generateBombs(smallBoard.numberElements, numberBombs);
+    let arrayOfBombs = newBombs.generateBombs(bigBoard.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
@@ -97,6 +97,10 @@ function expertGame() {
             $target.removeClass('flag')
             numberBombs++;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+        } else if ($target.text().length || $target.hasClass('bomb')) {
+            // This checks if there is something in the way
+            // that prevents placing the flag
+            return;
         } else {
 
             $target.addClass('flag');

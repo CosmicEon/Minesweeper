@@ -95,8 +95,11 @@ function beginnerGame() {
             $target.removeClass('flag')
             numberBombs++;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+        } else if ($target.text().length || $target.hasClass('bomb')) {
+            // This checks if there is something in the way
+            // that prevents placing the flag
+            return;
         } else {
-
             $target.addClass('flag');
             // $target.html('*');
             numberBombs--;

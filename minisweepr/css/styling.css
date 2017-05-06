@@ -36,12 +36,9 @@
 }
 
 .field {
-    width: 20px;
-    height: 20px;
-}
-
-.field:active {
-    border-style: outset;
+    width: 25px;
+    height: 25px;
+    padding-left: 10px;
 }
 
 .flag {
