@@ -79,7 +79,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             ev.target.style.color = colors[number];
 
             if(number == 0){
-                ev.target.innerHTML = ' ';
+                ev.target.innerHTML = number;
 
                 function openNeihbours(x, y){
                     let neighbourX = x;
@@ -87,18 +87,49 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
                     let id = neighbourX.toString() + '_' + neighbourY.toString();
                     let neighbourButton = document.getElementById(id);
 
-                    if(neighbourButton.bomb){
-                        return;
+                    neighbourButton.click();
+                }
+
+                function coordsinRange(x, y){
+                    if(0 <= x && x < numberOfRows && 0 <= y && y < numberOfColumns){
+                        return true;
                     }else{
-                        neighbourButton.click();
+                        return false;
                     }
                 }
 
-                openNeihbours(y - 1, x);
-                openNeihbours(y, x - 1);
-                openNeihbours(y, x + 1);
-                openNeihbours(y + 1, x);
-                
+                if(coordsinRange(x - 1, y - 1)){
+                    openNeihbours(x - 1, y - 1);
+                }
+
+                if(coordsinRange(x - 1, y)){
+                    openNeihbours(x - 1, y);
+                }
+
+                if(coordsinRange(x - 1, y + 1)){
+                    openNeihbours(x - 1, y + 1);
+                }
+
+              /*  if(coordsinRange(x, y - 1)){
+                    openNeihbours(x, y - 1);
+                }
+
+                if(coordsinRange(x, y + 1)){
+                    openNeihbours(x, y + 1);
+                }
+
+                if(coordsinRange(x + 1, y - 1)){
+                    openNeihbours(x + 1, y - 1);
+                }
+
+                if(coordsinRange(x + 1, y)){
+                    openNeihbours(x + 1, y);
+                }
+
+                if(coordsinRange(x + 1, y + 1)){
+                    openNeihbours(x + 1, y + 1);
+                }
+                */
                 return;
             }
 
