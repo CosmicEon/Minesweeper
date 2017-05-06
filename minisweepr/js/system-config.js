@@ -13,12 +13,12 @@ SystemJS.config({
         'router': './js/router.js',
         'tests': '../tests/tests.js',
         'utilities': './utilities.js',
-        // 'beginnerGame': './controllers/easyLevel.js',
-        // 'intermediateGame': './controllers/mediumLevel.js',
-        // 'expertGame': './controllers/hardLevel.js',
-        // 'helpController': './controllers/helpController.js',
+        'beginnerGame': './controllers/easyLevel.js',
+        'intermediateGame': './controllers/mediumLevel.js',
+        'expertGame': './controllers/hardLevel.js',
+        'helpController': './controllers/helpController.js',
         'templates': './templates.js',
-
+        'events':'./events.js',
 
         //libraries
         'jquery': './node_modules/jquery/dist/jquery.min.js',

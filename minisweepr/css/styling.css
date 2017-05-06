@@ -2,15 +2,15 @@
     margin-top: 17px;
 }
 
-#table {
+.table-styles {
     background-color: #99acc6;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 15px;
     margin-bottom: 20px;
 }
 
 .contrainer-slt {
     background-color: #D9E1E8;
+    padding: 15px;
 }
 
 .dropdown-container {
@@ -27,6 +27,10 @@
     margin: 10px;
 }
 
+.footer-margin {
+    margin: 10px;
+}
+
 .btn .caret {
     margin-left: 5px;
 }
@@ -36,21 +40,18 @@
     height: 20px;
 }
 
-.flag{
+.flag {
     background: url("../flag.png");
-
     background-size: 100% 100%;
     background-repeat: no-repeat;
-
 }
+
 .bomb {
     background: url("../bomb.jpg");
-
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-.hide{
-display: none;
+
+.hide {
+    display: none;
 }
-
-

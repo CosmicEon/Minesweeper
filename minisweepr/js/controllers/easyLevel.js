@@ -1,12 +1,13 @@
-import {Board} from '../board.js';
-import {generateBombs} from '../bombs.js';
+import { Board } from '../board.js';
+import { generateBombs } from '../bombs.js';
+import { Events } from '../events.js';
 
 
 function beginnerGame() {
     let $board = $('#table');
     $board.empty();
-    let smallBoard = new Board(9, 9);
-    console.log(smallBoard);
+    $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
+    var smallBoard = new Board(9, 9);
     $board.append(smallBoard.createBoard());
 
     let numberBombs = 10;
@@ -15,18 +16,19 @@ function beginnerGame() {
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
-
-
     }
+
+    let events = new Events(); // created for events
+    events.startTimer('game-time'); // starts the timer
 
     console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
 
-            if (ev.target.bomb) {
-                var show = function showBombs() {
-                    for (var i = 0; i < arrayOfBombs.length; i++) {
-                        arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
+        if (ev.target.bomb) {
+            var show = function showBombs() {
+                for (var i = 0; i < arrayOfBombs.length; i++) {
+                    arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
 
                     }
                 };
@@ -106,5 +108,5 @@ function beginnerGame() {
 
 }
 
-export {beginnerGame}
+export { beginnerGame }
 
