@@ -5,6 +5,7 @@ import { generateBombs } from '../bombs.js';
 function expertGame() {
     let $board = $('#table');
     $board.empty();
+    $board.addClass('table-styles');
     var bigBoard = new Board(16, 30);
 
     $board.append( bigBoard.createBoard());

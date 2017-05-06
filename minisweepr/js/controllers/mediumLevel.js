@@ -5,6 +5,7 @@ import { generateBombs } from '../bombs.js';
 function intermediateGame() {
     let $board = $('#table');
     $board.empty();
+    $board.addClass('table-styles');
     var mediumTable = new Board(16, 16);
 
     $board.append( mediumTable.createBoard());

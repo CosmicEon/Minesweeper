@@ -1,10 +1,11 @@
-import {Board} from '../board.js';
-import {generateBombs} from '../bombs.js';
+import { Board } from '../board.js';
+import { generateBombs } from '../bombs.js';
 
 
 function beginnerGame() {
     let $board = $('#table');
     $board.empty();
+    $board.addClass('table-styles');
     var smallBoard = new Board(9, 9);
     $board.append(smallBoard.createBoard());
 
@@ -23,12 +24,13 @@ function beginnerGame() {
     $('button').on('click', function (ev) {
 
         if (ev.target.bomb) {
-           var show= function showBombs(){
-            for (var i = 0; i < arrayOfBombs.length; i++) {
-                arrayOfBombs[i].className+=' bomb';//not jquery object to use addClass
+            var show = function showBombs() {
+                for (var i = 0; i < arrayOfBombs.length; i++) {
+                    arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
 
-            }};
-           show();
+                }
+            };
+            show();
             alert("Game Over");
         }
 
@@ -62,5 +64,5 @@ function beginnerGame() {
 
 }
 
-export {beginnerGame}
+export { beginnerGame }
 
