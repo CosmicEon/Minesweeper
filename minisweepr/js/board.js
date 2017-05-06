@@ -36,8 +36,6 @@ class Board {
             for (let x = 0; x < tableColumns; x++) {
                 let $button = document.createElement('button');
                 $button.className = 'btn-default field';
-                $button.setAttribute('y', y);
-                $button.setAttribute('x', x);
 
                 //set coordinates to button to indentifie each of them
 
