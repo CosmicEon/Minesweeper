@@ -39,6 +39,7 @@ class Board {
 
                 //set coordinates to button to indentifie each of them
 
+                $button.id = y.toString() + '_' + x.toString();
                 $button.coordX = y;
                 $button.coordY = x;
                 $button.bomb = false;
