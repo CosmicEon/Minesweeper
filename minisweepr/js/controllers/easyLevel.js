@@ -5,11 +5,10 @@ import { Events } from '../events.js';
 
 function beginnerGame() {
     let $board = $('#table');
-    let $timerContainer = $('.game-time span').empty();
-
     $board.empty();
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var smallBoard = new Board(9, 9);
+
     $board.append(smallBoard.createBoard());
 
     let numberBombs = 10;
@@ -31,48 +30,48 @@ function beginnerGame() {
             var show = function showBombs() {
                 for (var i = 0; i < arrayOfBombs.length; i++) {
                     arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
-
-                    }
-                };
-                show();
-                alert("Game Over");
-            } else {
-                let button = ev.target;
-                let x = button.coordX;
-                let y = button.coordY;
-
-                function howManyBombsArroundClickedButton(x, y, smallBoard) {
-                    let counterBomb = 0;
-
-                    let yMoving;
-                    if (y === 0) {
-                        yMoving = y;
-                    } else {
-                        yMoving = y - 1;
-                    }
-                    function FindByAttributeValue(coordX, coordY, value, value2) {
-                        let allElements = document.getElementsByTagName('button');
-                        for (let i = 0; i < allElements.length; i++) {
-                            if (allElements[i].coordX === value&&allElements[i].coordY===value2) {
-                                return allElements[i];
-
-                            }
-
-                        }
-                    }
-
-                    for (; yMoving <= y + 1 && yMoving < smallBoard.rows; yMoving++) {
-                        let xMoving = x == 0 ? x : x - 1;
-                        for (; xMoving <= x + 1 && xMoving < smallBoard.cols; xMoving++) {
-                            let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
-                            if (selEl.bomb) {
-                                counterBomb++;
-
-                            }
-                        }
-                    }
-                    return counterBomb;
                 }
+            };
+            show();
+            alert("Game Over");
+            events.stopTimer(); // stop the timer
+        } else {
+            let button = ev.target;
+            let x = button.coordX;
+            let y = button.coordY;
+
+            function howManyBombsArroundClickedButton(x, y, smallBoard) {
+                let counterBomb = 0;
+
+                let yMoving;
+                if (y === 0) {
+                    yMoving = y;
+                } else {
+                    yMoving = y - 1;
+                }
+                function FindByAttributeValue(coordX, coordY, value, value2) {
+                    let allElements = document.getElementsByTagName('button');
+                    for (let i = 0; i < allElements.length; i++) {
+                        if (allElements[i].coordX === value && allElements[i].coordY === value2) {
+                            return allElements[i];
+
+                        }
+
+                    }
+                }
+
+                for (; yMoving <= y + 1 && yMoving < smallBoard.rows; yMoving++) {
+                    let xMoving = x == 0 ? x : x - 1;
+                    for (; xMoving <= x + 1 && xMoving < smallBoard.cols; xMoving++) {
+                        let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
+                        if (selEl.bomb) {
+                            counterBomb++;
+
+                        }
+                    }
+                }
+                return counterBomb;
+            }
 
                 let number = howManyBombsArroundClickedButton(x, y, smallBoard);
                 let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
@@ -81,8 +80,9 @@ function beginnerGame() {
                 ev.target.innerHTML=number;
             }
         }
+    }
     )
-    ;
+        ;
 
 
     $('button').on('contextmenu', function (ev) {

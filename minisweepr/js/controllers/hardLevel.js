@@ -5,12 +5,12 @@ import { Events } from '../events.js';
 
 function expertGame() {
     let $board = $('#table');
-    let $timerContainer = $('.game-time span').empty();
     $board.empty();
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var bigBoard = new Board(16, 30);
 
     $board.append(bigBoard.createBoard());
+
     let numberBombs = 99;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let arrayOfBombs = generateBombs(bigBoard.numberElements, numberBombs);
@@ -21,7 +21,6 @@ function expertGame() {
 
     let events = new Events(); // created for events
     events.startTimer('game-time'); // starts the timer
-
 
     console.log(arrayOfBombs);
 
@@ -35,7 +34,8 @@ function expertGame() {
             };
             show();
             alert("Game Over");
-        }else {
+            events.stopTimer(); // stop the timer
+        } else {
             let button = ev.target;
             let x = button.coordX;
             let y = button.coordY;
@@ -52,7 +52,7 @@ function expertGame() {
                 function FindByAttributeValue(coordX, coordY, value, value2) {
                     let allElements = document.getElementsByTagName('button');
                     for (let i = 0; i < allElements.length; i++) {
-                        if (allElements[i].coordX === value&&allElements[i].coordY===value2) {
+                        if (allElements[i].coordX === value && allElements[i].coordY === value2) {
                             return allElements[i];
 
                         }
