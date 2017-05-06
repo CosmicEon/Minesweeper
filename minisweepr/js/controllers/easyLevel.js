@@ -53,10 +53,9 @@ function beginnerGame() {
                     let allElements = document.getElementsByTagName('button');
                     for (let i = 0; i < allElements.length; i++) {
                         if (allElements[i].coordX === value && allElements[i].coordY === value2) {
+
                             return allElements[i];
-
                         }
-
                     }
                 }
 
@@ -70,6 +69,7 @@ function beginnerGame() {
                         }
                     }
                 }
+
                 return counterBomb;
             }
 
@@ -80,14 +80,12 @@ function beginnerGame() {
                 ev.target.innerHTML=number;
             }
         }
-    }
-    )
-        ;
+    });
 
 
     $('button').on('contextmenu', function (ev) {
         let flag = $('<img>');
-        flag.attr('src', '../flag.png');
+        flag.attr('src', '../../img/flag.png');
         flag.addClass('img');
 
         let $target = $(ev.target);

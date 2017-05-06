@@ -86,7 +86,7 @@ function intermediateGame() {
 
     $('button').on('contextmenu', function (ev) {
         let flag = $('<img>');
-        flag.attr('src', '../flag.png');
+        flag.attr('src', '../../img/flag.png');
         flag.addClass('img');
 
         let $target = $(ev.target);
