@@ -28,9 +28,49 @@ function intermediateGame() {
                 }};
             show();
             alert("Game Over");
-        }
+        }else {
+            let button = ev.target;
+            let x = button.coordX;
+            let y = button.coordY;
 
-        console.log(ev.which);
+            function howManyBombsArroundClickedButton(x, y, mediumTable) {
+                let counterBomb = 0;
+
+                let yMoving;
+                if (y === 0) {
+                    yMoving = y;
+                } else {
+                    yMoving = y - 1;
+                }
+                function FindByAttributeValue(coordX, coordY, value, value2) {
+                    let allElements = document.getElementsByTagName('button');
+                    for (let i = 0; i < allElements.length; i++) {
+                        if (allElements[i].coordX === value&&allElements[i].coordY===value2) {
+                            return allElements[i];
+
+                        }
+
+                    }
+                }
+
+                for (; yMoving <= y + 1 && yMoving < mediumTable.rows; yMoving++) {
+                    let xMoving = x == 0 ? x : x - 1;
+                    for (; xMoving <= x + 1 && xMoving < mediumTable.cols; xMoving++) {
+                        let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
+                        if (selEl.bomb) {
+                            counterBomb++;
+
+                        }
+                    }
+                }
+                return counterBomb;
+
+
+            }
+
+            let number = howManyBombsArroundClickedButton(x, y, mediumTable);
+            ev.target.innerHTML=number;
+        }
 
     });
 

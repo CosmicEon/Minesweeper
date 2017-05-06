@@ -5,7 +5,8 @@ import {generateBombs} from '../bombs.js';
 function beginnerGame() {
     let $board = $('#table');
     $board.empty();
-    var smallBoard = new Board(9, 9);
+    let smallBoard = new Board(9, 9);
+    console.log(smallBoard);
     $board.append(smallBoard.createBoard());
 
     let numberBombs = 10;
@@ -22,19 +23,61 @@ function beginnerGame() {
 
     $('button').on('click', function (ev) {
 
-        if (ev.target.bomb) {
-           var show= function showBombs(){
-            for (var i = 0; i < arrayOfBombs.length; i++) {
-                arrayOfBombs[i].className+=' bomb';//not jquery object to use addClass
+            if (ev.target.bomb) {
+                var show = function showBombs() {
+                    for (var i = 0; i < arrayOfBombs.length; i++) {
+                        arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
 
-            }};
-           show();
-            alert("Game Over");
+                    }
+                };
+                show();
+                alert("Game Over");
+            } else {
+                let button = ev.target;
+                let x = button.coordX;
+                let y = button.coordY;
+
+                function howManyBombsArroundClickedButton(x, y, smallBoard) {
+                    let counterBomb = 0;
+
+                    let yMoving;
+                    if (y === 0) {
+                        yMoving = y;
+                    } else {
+                        yMoving = y - 1;
+                    }
+                    function FindByAttributeValue(coordX, coordY, value, value2) {
+                        let allElements = document.getElementsByTagName('button');
+                        for (let i = 0; i < allElements.length; i++) {
+                            if (allElements[i].coordX === value&&allElements[i].coordY===value2) {
+                                return allElements[i];
+
+                            }
+
+                        }
+                    }
+
+                    for (; yMoving <= y + 1 && yMoving < smallBoard.rows; yMoving++) {
+                        let xMoving = x == 0 ? x : x - 1;
+                        for (; xMoving <= x + 1 && xMoving < smallBoard.cols; xMoving++) {
+                            let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
+                            if (selEl.bomb) {
+                                counterBomb++;
+
+                            }
+                        }
+                    }
+                    return counterBomb;
+
+
+                }
+
+                let number = howManyBombsArroundClickedButton(x, y, smallBoard);
+                ev.target.innerHTML=number;
+            }
         }
-
-        console.log(ev.which);
-
-    });
+    )
+    ;
 
 
     $('button').on('contextmenu', function (ev) {
@@ -59,6 +102,7 @@ function beginnerGame() {
 
         //think to simplifie,duplicate on each controller
     });
+
 
 }
 

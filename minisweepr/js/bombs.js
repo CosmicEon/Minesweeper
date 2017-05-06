@@ -1,8 +1,9 @@
 //see if class is necessary,or just functoins
 //depends if we set attributes to buttons
+
 class Bomb {
     constructor(coordX, coordY) {
-        this._x = coordX;
+        this.x = coordX;
         this.y = coordY;
     }
 
@@ -25,13 +26,13 @@ class Bomb {
 
 let arrayOfBombs = [];
 
+
 function generateBombs(array, numberOfBombs) {
-    let arrayOfBombs= [];
+    let arrayOfBombs = [];
     for (var i = 0; i < numberOfBombs; i++) {
         let index = Math.floor(Math.random() * array.length);
         let bomb = array[index];
         arrayOfBombs.push(bomb);
-        array.splice(index, 1);
 
 
     }
@@ -39,4 +40,5 @@ function generateBombs(array, numberOfBombs) {
 
 
 }
-export {generateBombs};
+
+export {generateBombs };
