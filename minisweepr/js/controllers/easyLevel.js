@@ -79,7 +79,6 @@ function beginnerGame() {
 
                 ev.target.innerHTML=number;
             }
-        }
     });
 
 
