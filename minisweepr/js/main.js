@@ -3,7 +3,7 @@ import 'jquery';
 import { beginnerGame } from './controllers/easyLevel.js';
 import { intermediateGame } from './controllers/mediumLevel.js';
 import { expertGame } from './controllers/hardLevel.js';
-import { Utilities } from './utilities.js';
+import { Utilities } from './app/utilities.js';
 import { help } from './controllers/helpController.js';
 import {newGame} from './controllers/level.js';
 

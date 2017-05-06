@@ -12,13 +12,13 @@ SystemJS.config({
         //scripts
         'router': './js/router.js',
         'tests': '../tests/tests.js',
-        'utilities': './utilities.js',
+        'utilities': './app/utilities.js',
         'beginnerGame': './controllers/easyLevel.js',
         'intermediateGame': './controllers/mediumLevel.js',
         'expertGame': './controllers/hardLevel.js',
         'helpController': './controllers/helpController.js',
-        'templates': './templates.js',
-        'events': './events.js',
+        'templates': './app/templates.js',
+        'events': './app/events.js',
         'bombs': './bombs.js',
 
         //libraries

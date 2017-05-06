@@ -1,4 +1,4 @@
-import { load } from '../templates.js';
+import { load } from '../app/templates.js';
 
 function help() {
     // let mainContainer = document.getElementById('table');

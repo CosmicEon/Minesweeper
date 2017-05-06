@@ -1,6 +1,6 @@
 import { Board } from '../board.js';
 import { Bombs } from '../bombs.js';
-import { Events } from '../events.js';
+import { Events } from '../app/events.js';
 
 
 function intermediateGame() {
