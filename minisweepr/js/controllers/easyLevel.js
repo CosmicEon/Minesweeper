@@ -1,5 +1,5 @@
 import { Board } from '../board.js';
-import { generateBombs } from '../bombs.js';
+import { Bombs } from '../bombs.js';
 import { Events } from '../events.js';
 
 
@@ -13,7 +13,8 @@ function beginnerGame() {
 
     let numberBombs = 10;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-    let arrayOfBombs = generateBombs(smallBoard.numberElements, numberBombs);
+    let newBombs = new Bombs();
+    let arrayOfBombs = newBombs.generateBombs(smallBoard.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
@@ -73,12 +74,12 @@ function beginnerGame() {
                 return counterBomb;
             }
 
-                let number = howManyBombsArroundClickedButton(x, y, smallBoard);
-                let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
-                ev.target.style.color=colors[number];
+            let number = howManyBombsArroundClickedButton(x, y, smallBoard);
+            let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
+            ev.target.style.color = colors[number];
 
-                ev.target.innerHTML=number;
-            }
+            ev.target.innerHTML = number;
+        }
     });
 
 

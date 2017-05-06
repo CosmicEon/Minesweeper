@@ -40,6 +40,10 @@
     height: 20px;
 }
 
+.field:active {
+    border-style: outset;
+}
+
 .flag {
     background: url("../../img/flag.png");
     background-size: 100% 100%;

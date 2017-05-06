@@ -6,7 +6,6 @@ class Board {
 
     }
 
-
     get rows() {
         return this._rows;
     }
@@ -28,7 +27,7 @@ class Board {
         let tableRows = this._rows;
         let table = new Array(tableRows);
 
-        let $createdBoard=$('<div>');
+        let $createdBoard = $('<div>');
 
 
         for (let y = 0; y < tableRows; y++) {
@@ -59,4 +58,4 @@ class Board {
     //TODO add methods, fields and properties
 }
 
-export {Board};
+export { Board };
