@@ -72,11 +72,12 @@ function beginnerGame() {
                         }
                     }
                     return counterBomb;
-
-
                 }
 
                 let number = howManyBombsArroundClickedButton(x, y, smallBoard);
+                let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
+                ev.target.style.color=colors[number];
+
                 ev.target.innerHTML=number;
             }
         }

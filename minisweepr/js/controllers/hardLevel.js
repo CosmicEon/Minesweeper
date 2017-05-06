@@ -76,6 +76,9 @@ function expertGame() {
             }
 
             let number = howManyBombsArroundClickedButton(x, y, bigBoard);
+            let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
+            ev.target.style.color=colors[number];
+
             ev.target.innerHTML=number;
         }
 

@@ -76,6 +76,9 @@ function intermediateGame() {
             }
 
             let number = howManyBombsArroundClickedButton(x, y, mediumTable);
+            let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
+            ev.target.style.color=colors[number];
+
             ev.target.innerHTML=number;
         }
 
