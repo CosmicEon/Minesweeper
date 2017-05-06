@@ -30,12 +30,12 @@ function intermediateGame() {
             var show = function showBombs() {
                 for (var i = 0; i < arrayOfBombs.length; i++) {
                     arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
-
                 }
             };
             show();
             alert("Game Over");
-        }else {
+            events.stopTimer(); // stop the timer
+        } else {
             let button = ev.target;
             let x = button.coordX;
             let y = button.coordY;
@@ -52,7 +52,7 @@ function intermediateGame() {
                 function FindByAttributeValue(coordX, coordY, value, value2) {
                     let allElements = document.getElementsByTagName('button');
                     for (let i = 0; i < allElements.length; i++) {
-                        if (allElements[i].coordX === value&&allElements[i].coordY===value2) {
+                        if (allElements[i].coordX === value && allElements[i].coordY === value2) {
                             return allElements[i];
 
                         }
@@ -76,7 +76,7 @@ function intermediateGame() {
             }
 
             let number = howManyBombsArroundClickedButton(x, y, mediumTable);
-            ev.target.innerHTML=number;
+            ev.target.innerHTML = number;
         }
 
     });
