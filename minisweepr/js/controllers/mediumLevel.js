@@ -1,5 +1,5 @@
 import { Board } from '../board.js';
-import { generateBombs } from '../bombs.js';
+import { Bombs } from '../bombs.js';
 import { Events } from '../events.js';
 
 
@@ -13,7 +13,8 @@ function intermediateGame() {
 
     let numberBombs = 40;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-    let arrayOfBombs = generateBombs(mediumTable.numberElements, numberBombs);
+    let newBombs = new Bombs();
+    let arrayOfBombs = newBombs.generateBombs(mediumTable.numberElements, numberBombs);
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
@@ -76,10 +77,10 @@ function intermediateGame() {
             }
 
             let number = howManyBombsArroundClickedButton(x, y, mediumTable);
-            let colors=['red','teal','brown','rebeccapurple','purple','darkgreen','green','navy'];
-            ev.target.style.color=colors[number];
+            let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
+            ev.target.style.color = colors[number];
 
-            ev.target.innerHTML=number;
+            ev.target.innerHTML = number;
         }
 
     });
@@ -96,6 +97,10 @@ function intermediateGame() {
             $target.removeClass('flag')
             numberBombs++;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+        } else if ($target.text().length || $target.hasClass('bomb')) {
+            // This checks if there is something in the way
+            // that prevents placing the flag
+            return;
         } else {
 
             $target.addClass('flag');

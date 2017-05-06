@@ -18,7 +18,8 @@ SystemJS.config({
         'expertGame': './controllers/hardLevel.js',
         'helpController': './controllers/helpController.js',
         'templates': './templates.js',
-        'events':'./events.js',
+        'events': './events.js',
+        'bombs': './bombs.js',
 
         //libraries
         'jquery': './node_modules/jquery/dist/jquery.min.js',

@@ -24,6 +24,10 @@ class Utilities {
 
         return t;
     }
+
+    highScore() {
+
+    }
 }
 
 export { Utilities };
