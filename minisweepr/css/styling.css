@@ -41,13 +41,13 @@
 }
 
 .flag {
-    background: url("../flag.png");
+    background: url("../../img/flag.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 .bomb {
-    background: url("../bomb.jpg");
+    background: url("../../img/bomb.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
