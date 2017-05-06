@@ -1,11 +1,12 @@
 import { Board } from '../board.js';
 import { generateBombs } from '../bombs.js';
+import { Events } from '../events.js';
 
 
 function beginnerGame() {
     let $board = $('#table');
     $board.empty();
-    $board.addClass('table-styles');
+    $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var smallBoard = new Board(9, 9);
     $board.append(smallBoard.createBoard());
 
@@ -15,9 +16,10 @@ function beginnerGame() {
 
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
-
-
     }
+
+    let events = new Events(); // created for events
+    events.startTimer('game-time'); // starts the timer
 
     console.log(arrayOfBombs);
 
@@ -32,6 +34,7 @@ function beginnerGame() {
             };
             show();
             alert("Game Over");
+            events.stopTimer(); // stop the timer
         }
 
         console.log(ev.which);

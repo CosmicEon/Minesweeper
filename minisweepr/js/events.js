@@ -1,21 +1,21 @@
 class Events {
 	constructor() {
-		this.timer = null;
-
+		let timer = null;
 	}
 
-	startTimer() {
-		time = 0;
-		const elTimer = document.getElementById('game-time');
+
+	startTimer(element) {
+		let time = 0;
+		let timerContainer = document.getElementById(element).childNodes[1];
 
 		this.timer = setInterval(function () {
 			++time;
-			elTimer.innerHTML = time;
+			timerContainer.innerHTML = time;
 		}, 1000);
 	}
 
 	stopTimer() {
-		clearInterval(timer);
+		clearInterval(this.timer);
 	}
 
 	listen() {
@@ -101,3 +101,5 @@ class Events {
 
 	//TODO add methods, fields and properties
 }
+
+export { Events };

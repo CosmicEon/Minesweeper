@@ -1,14 +1,15 @@
 import { Board } from '../board.js';
 import { generateBombs } from '../bombs.js';
+import { Events } from '../events.js';
 
 
 function intermediateGame() {
     let $board = $('#table');
     $board.empty();
-    $board.addClass('table-styles');
+    $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var mediumTable = new Board(16, 16);
 
-    $board.append( mediumTable.createBoard());
+    $board.append(mediumTable.createBoard());
 
     let numberBombs = 40;
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
@@ -17,18 +18,24 @@ function intermediateGame() {
     for (let bomb of arrayOfBombs) {
         bomb.bomb = true;
     }
+
+    let events = new Events(); // created for events
+    events.startTimer('game-time'); // starts the timer
+
     console.log(arrayOfBombs);
 
     $('button').on('click', function (ev) {
 
         if (ev.target.bomb) {
-            var show= function showBombs(){
+            var show = function showBombs() {
                 for (var i = 0; i < arrayOfBombs.length; i++) {
-                    arrayOfBombs[i].className+=' bomb';//not jquery object to use addClass
+                    arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
 
-                }};
+                }
+            };
             show();
             alert("Game Over");
+            events.stopTimer(); // stop the timer
         }
 
         console.log(ev.which);
@@ -36,8 +43,8 @@ function intermediateGame() {
     });
 
     $('button').on('contextmenu', function (ev) {
-        let flag=$('<img>');
-        flag.attr('src','../flag.png');
+        let flag = $('<img>');
+        flag.attr('src', '../flag.png');
         flag.addClass('img');
 
         let $target = $(ev.target);
@@ -49,8 +56,8 @@ function intermediateGame() {
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         } else {
 
-           $target.addClass('flag');
-           // $target.html('*');
+            $target.addClass('flag');
+            // $target.html('*');
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
         }
