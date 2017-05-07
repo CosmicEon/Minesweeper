@@ -27,12 +27,22 @@
     margin: 10px;
 }
 
+.input-margin {
+    margin: 14px;
+    height: 40px;
+}
+
 .footer-margin {
     margin: 10px;
 }
 
 .btn .caret {
     margin-left: 5px;
+}
+
+.top-buffer {
+    padding-top: 10px;
+    margin-top: 10px;
 }
 
 .field {

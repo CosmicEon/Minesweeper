@@ -26,6 +26,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let events = new Events(); // created for events
     let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
+    let timerValue = null;
 
     //left click a square
     $('button').on('click', squareLeftClick);
@@ -45,43 +46,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
             alert("Game Over");
 
-            let timerValue = timerContainer.innerText;
+            timerValue = timerContainer.innerText; // save current time to use it for score
             events.stopTimer(timerContainer); // stop the timer
             events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
-
-            let saveScore = function (ev) {
-                let enterKey = ev.which || ev.keyCode;
-                let enterTriggered = false;
-                if (enterKey === 13) { // 13 is enter
-                    let storage = new Utilities();
-
-                    let $name = $(this).val();
-                    let score = timerValue;
-                    // storage.localStorageSet(name, score);
-
-                    console.log(this);
-                    console.log($name);
-                    console.log(score);
-                    console.log('-------------------------------');
-
-
-                    // $(this).val('');
-                    document.removeEventListener('keypress', saveScore.bind(this));
-                    enterTriggered = true;
-                } else {
-                    return;
-                }
-
-                if (enterTriggered){
-                    events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
-
-                }
-            };
-
-            document.querySelector('#high-score-input')
-                .addEventListener('keypress', saveScore);
-
-
 
         } else {
             let button = ev.target;
@@ -124,7 +91,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
             if (number == 0) {
                 ev.target.innerHTML = 0;
-                var expand=function(){
+                var expand = function () {
                     let yMoving = y === 0 ? y : y - 1;
 
                     for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
@@ -143,10 +110,34 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
             }
             let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
-            ev.target.style.color = colors[number-1];
+            ev.target.style.color = colors[number - 1];
             ev.target.innerHTML = number;
         }
     }
+
+    // event for input field
+    let inputHighScore = document.querySelector('#high-score-input');
+    inputHighScore.addEventListener('keypress', saveScore);
+    let storage = new Utilities();
+
+    function saveScore(ev) {
+        let enterTriggered = false;
+        let name = inputHighScore.value;
+        if (ev.keyCode === 13) { // 13 is enter
+            storage.localStorageSet(name, timerValue);
+
+            console.log(storage.allStorage()); // for testing
+
+            document.removeEventListener('keypress', saveScore);
+            enterTriggered = true;
+        }
+        if (enterTriggered) {
+            events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+            inputHighScore.innerHTML = '';
+        }
+    }
+    document.removeEventListener('keypress', saveScore);
+
 
     //right click a square
     $('button').on('contextmenu', squareRightClick);
@@ -179,6 +170,8 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
     $(window).on('hashchange', function () {
         events.stopTimer(timerContainer); // stop the timer when page is changed
+        document.removeEventListener('keypress', saveScore);
+        inputHighScore.innerHTML = '';
     });
 }
 

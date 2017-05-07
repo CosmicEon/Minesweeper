@@ -26,12 +26,26 @@ class Utilities {
     }
 
     localStorageSet(key, value) {
-        localStorage.setItem(key, value);
+        let player = {
+            name: key,
+            score: value
+        };
+
+        localStorage.setItem(key, JSON.stringify(player));
     }
 
-    localStorageGet(key) {
-        localStorage.getItem(key);
+    allStorage() {
+        let archive = [];
+
+        for (let name in localStorage) {
+            if (localStorage.hasOwnProperty(name)) {
+                archive.push(localStorage[name]);
+            }
+        }
+
+        return archive;
     }
+
 }
 
 export { Utilities };
