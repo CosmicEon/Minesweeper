@@ -8,9 +8,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //create board
     let $board = $('#table');
     $board.empty();
-    //this class broke the css
+
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
-    var board = new Board(numberOfRows, numberOfColumns);
+    let board = new Board(numberOfRows, numberOfColumns);
 
     $board.append(board.createBoard());
 
@@ -24,7 +24,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     let events = new Events(); // created for events
+    let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
+    let timerValue = null;
 
     //left click a square
     $('button').on('click', squareLeftClick);
@@ -60,31 +62,11 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
                 }
 
                 alert("Game Over");
-                let timerValue = document.getElementById('game-time').childNodes[1].innerText;
 
-                events.stopTimer(); // stop the timer
-                events.openHighScoreMenu("#high-scores-btn", '#high-score-input');
 
-                var handleKeyDown = function (ev) {
-                    let enterKey = ev.which || ev.keyCode;
-                    if (enterKey === 13) { // 13 is enter
-                        let storage = new Utilities();
-
-                        var name = $(this).val();
-                        var score = timerValue;
-                        storage.localStorageSet(name, score);
-
-                        console.log('enter');
-                        console.log(name);
-                        console.log(score);
-                        document.removeEventListener('keypress', handleKeyDown);
-
-                        events.closeHighScoreMenu("#high-scores-btn", '#high-score-input');
-                    }
-                };
-
-                document.querySelector('#high-score-input')
-                    .addEventListener('keypress', handleKeyDown);
+                timerValue = timerContainer.innerText; // save current time to use it for score
+                events.stopTimer(timerContainer); // stop the timer
+                events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
             } else {
                 let button = ev.target;
                 let x = button.coordX;
@@ -152,6 +134,29 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
                 ev.target.innerHTML = number;
             }
         }
+
+    // event for input field
+    let inputHighScore = document.querySelector('#high-score-input');
+    inputHighScore.addEventListener('keypress', saveScore);
+    let storage = new Utilities();
+
+    function saveScore(ev) {
+        let enterTriggered = false;
+        let name = inputHighScore.value;
+        if (ev.keyCode === 13) { // 13 is enter
+            storage.localStorageSet(name, timerValue);
+
+            console.log(storage.allStorage()); // for testing
+
+            document.removeEventListener('keypress', saveScore);
+            enterTriggered = true;
+        }
+        if (enterTriggered) {
+            events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+            inputHighScore.innerHTML = '';
+        }
+    }
+    document.removeEventListener('keypress', saveScore);
 
 //right click a square
         $('button').on('contextmenu', squareRightClick);
