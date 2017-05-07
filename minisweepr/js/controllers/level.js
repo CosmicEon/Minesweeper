@@ -24,6 +24,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     let events = new Events(); // created for events
+    let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
 
     //left click a square
@@ -35,6 +36,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         if (location.hash === '#/beginner') {
             return newGame(10, 8, 8);
         }
+<<<<<<< .mine
         else if (location.hash === '#/intermediate') {
             return newGame(40, 16, 16);
         }
@@ -42,11 +44,57 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             return newGame(99, 16, 30);
         }
     }
+=======
+
+        if (ev.target.bomb) {
+            for (let i = 0; i < arrayOfBombs.length; i++) {
+                arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
+            }
+
+
+>>>>>>> .theirs
+
+<<<<<<< .mine
+
+=======
+            alert("Game Over");
+>>>>>>> .theirs
+
+<<<<<<< .mine
+
+
+
+=======
+            let timerValue = timerContainer.innerText;
+            events.stopTimer(timerContainer); // stop the timer
+            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+>>>>>>> .theirs
+
+<<<<<<< .mine
 
 
 
 
 
+=======
+            let saveScore = function (ev) {
+                let enterKey = ev.which || ev.keyCode;
+                let enterTriggered = false;
+                if (enterKey === 13) { // 13 is enter
+                    let storage = new Utilities();
+>>>>>>> .theirs
+
+<<<<<<< .mine
+
+
+
+=======
+                    let $name = $(this).val();
+                    let score = timerValue;
+                    // storage.localStorageSet(name, score);
+>>>>>>> .theirs
+
+<<<<<<< .mine
 function squareLeftClick(ev) {
     if (ev.target.nodeName == 'BUTTON' && firstTriggered) {
         // this starts the timer when a click is made on the board
@@ -58,12 +106,71 @@ function squareLeftClick(ev) {
         for (let i = 0; i < arrayOfBombs.length; i++) {
             arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
         }
+=======
+                    console.log(this);
+                    console.log($name);
+                    console.log(score);
+                    console.log('-------------------------------');
 
+
+
+
+
+
+
+>>>>>>> .theirs
+
+<<<<<<< .mine
         alert("Game Over");
         let timerValue = document.getElementById('game-time').childNodes[1].innerText;
 
+
+
+
+
+
+
+
+
+
+
+=======
+
+                    // $(this).val('');
+                    document.removeEventListener('keypress', saveScore.bind(this));
+                    enterTriggered = true;
+                } else {
+                    return;
+                }
+
+                if (enterTriggered){
+                    events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+
+                }
+            };
+>>>>>>> .theirs
+
+<<<<<<< .mine
         events.stopTimer(); // stop the timer
         events.openHighScoreMenu("#high-scores-btn", '#high-score-input');
+
+
+
+
+
+
+
+=======
+            document.querySelector('#high-score-input')
+                .addEventListener('keypress', saveScore);
+
+
+
+        } else {
+            let button = ev.target;
+            let x = button.coordX;
+            let y = button.coordY;
+>>>>>>> .theirs
 
         var handleKeyDown = function (ev) {
             let enterKey = ev.which || ev.keyCode;
@@ -175,7 +282,15 @@ function squareRightClick(ev) {
         $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     }
 
+<<<<<<< .mine
     //think to simplifie,duplicate on each controller
+
+
+=======
+    $(window).on('hashchange', function () {
+        events.stopTimer(timerContainer); // stop the timer when page is changed
+    });
+>>>>>>> .theirs
 }
 
 $(window).on('hashchange', function () {

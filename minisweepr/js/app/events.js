@@ -6,32 +6,24 @@ class Events {
 
 	startTimer(element) {
 		let time = 0;
-		let timerContainer = document.getElementById(element).childNodes[1];
 
 		this.timer = setInterval(function () {
 			++time;
-			timerContainer.innerHTML = time;
+			element.innerHTML = time;
 		}, 1000);
 	}
 
-	stopTimer() {
+	stopTimer(element) {
 		clearInterval(this.timer);
+		element.innerHTML = 0;
 	}
 
-	openHighScoreMenu(buttonId, inputId) {
-		let $button = $(buttonId);
-		let $input = $(inputId);
+	switchElementsVisibility(hideElementId, unhideElementId) {
+		let $hide = $(hideElementId);
+		let $unhide = $(unhideElementId);
 
-		$button.addClass('hidden');
-		$input.removeClass('hidden');
-	}
-
-	closeHighScoreMenu(buttonId, inputId) {
-		let $button = $(buttonId);
-		let $input = $(inputId);
-
-		$input.addClass('hidden');
-		$button.removeClass('hidden');
+		$hide.addClass('hidden');
+		$unhide.removeClass('hidden');
 	}
 }
 
