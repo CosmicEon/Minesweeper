@@ -25,7 +25,7 @@ class Utilities {
         return t;
     }
 
-    highScore() {
+    sesionStorage() {
 
     }
 }

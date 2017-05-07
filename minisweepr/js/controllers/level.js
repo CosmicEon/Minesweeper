@@ -23,14 +23,20 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     let events = new Events(); // created for events
-    events.startTimer('game-time'); // starts the timer
+    let firstTriggered = true;
 
     //left click a square
-    $('button').on('click', squareLeftClick)
+    $('button').on('click', squareLeftClick);
 
-    function squareLeftClick(ev){
+    function squareLeftClick(ev) {
+        if (ev.target.nodeName == 'BUTTON' && firstTriggered) {
+            // this starts the timer when a click is made on the board
+            // and checkс its the only 1st click
+            firstTriggered = false;
+            events.startTimer('game-time'); // starts the timer
+        }
         if (ev.target.bomb) {
-            for (var i = 0; i < arrayOfBombs.length; i++) {
+            for (let i = 0; i < arrayOfBombs.length; i++) {
                 arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
             }
 
@@ -78,10 +84,10 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
             ev.target.style.color = colors[number];
 
-            if(number == 0){
+            if (number == 0) {
                 ev.target.innerHTML = number;
 
-                function openNeihbours(x, y){
+                function openNeihbours(x, y) {
                     let neighbourX = x;
                     let neighbourY = y;
                     let id = neighbourX.toString() + '_' + neighbourY.toString();
@@ -90,46 +96,46 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
                     neighbourButton.click();
                 }
 
-                function coordsinRange(x, y){
-                    if(0 <= x && x < numberOfRows && 0 <= y && y < numberOfColumns){
+                function coordsinRange(x, y) {
+                    if (0 <= x && x < numberOfRows && 0 <= y && y < numberOfColumns) {
                         return true;
-                    }else{
+                    } else {
                         return false;
                     }
                 }
 
-                if(coordsinRange(x - 1, y - 1)){
+                if (coordsinRange(x - 1, y - 1)) {
                     openNeihbours(x - 1, y - 1);
                 }
 
-                if(coordsinRange(x - 1, y)){
+                if (coordsinRange(x - 1, y)) {
                     openNeihbours(x - 1, y);
                 }
 
-                if(coordsinRange(x - 1, y + 1)){
+                if (coordsinRange(x - 1, y + 1)) {
                     openNeihbours(x - 1, y + 1);
                 }
 
-              /*  if(coordsinRange(x, y - 1)){
-                    openNeihbours(x, y - 1);
-                }
-
-                if(coordsinRange(x, y + 1)){
-                    openNeihbours(x, y + 1);
-                }
-
-                if(coordsinRange(x + 1, y - 1)){
-                    openNeihbours(x + 1, y - 1);
-                }
-
-                if(coordsinRange(x + 1, y)){
-                    openNeihbours(x + 1, y);
-                }
-
-                if(coordsinRange(x + 1, y + 1)){
-                    openNeihbours(x + 1, y + 1);
-                }
-                */
+                /*  if(coordsinRange(x, y - 1)){
+                      openNeihbours(x, y - 1);
+                  }
+  
+                  if(coordsinRange(x, y + 1)){
+                      openNeihbours(x, y + 1);
+                  }
+  
+                  if(coordsinRange(x + 1, y - 1)){
+                      openNeihbours(x + 1, y - 1);
+                  }
+  
+                  if(coordsinRange(x + 1, y)){
+                      openNeihbours(x + 1, y);
+                  }
+  
+                  if(coordsinRange(x + 1, y + 1)){
+                      openNeihbours(x + 1, y + 1);
+                  }
+                  */
                 return;
             }
 

@@ -12,7 +12,7 @@ shareUtilities.facebookShare(document, 'script', 'facebook-jssdk');
 shareUtilities.twitterShare(document, "script", "twitter-wjs");
 
 router
-    .on('/beginner', () => newGame(10, 9, 9))
+    .on('/beginner', () => newGame(10, 8, 8))
     .on('/intermediate', () => newGame(40, 16, 16))
     .on('/expert', () => newGame(99, 16, 30))
     .on('/new-game', () => location.hash = '/beginner') //restart return to first page,see video
