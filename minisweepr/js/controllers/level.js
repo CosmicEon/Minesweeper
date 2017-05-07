@@ -8,7 +8,8 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //create board
     let $board = $('#table');
     $board.empty();
-    $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
+    //this class broke the css
+   $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     var board = new Board(numberOfRows, numberOfColumns);
 
     $board.append(board.createBoard());
@@ -47,28 +48,26 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             let x = button.coordX;
             let y = button.coordY;
 
+            function FindByAttributeValue(coordX, coordY, value, value2) {
+                let allElements = document.getElementsByTagName('button');
+                for (let i = 0; i < allElements.length; i++) {
+                    if (allElements[i].coordX === value && allElements[i].coordY === value2) {
+
+                        return allElements[i];
+                    }
+                }
+            }
+
             function howManyBombsArroundClickedButton(x, y) {
                 let counterBomb = 0;
 
-                let yMoving;
-                if (y === 0) {
-                    yMoving = y;
-                } else {
-                    yMoving = y - 1;
-                }
-                function FindByAttributeValue(coordX, coordY, value, value2) {
-                    let allElements = document.getElementsByTagName('button');
-                    for (let i = 0; i < allElements.length; i++) {
-                        if (allElements[i].coordX === value && allElements[i].coordY === value2) {
+                let yMoving = y === 0 ? y : y - 1;
 
-                            return allElements[i];
-                        }
-                    }
-                }
 
-                for (; yMoving <= y + 1 && yMoving < board.rows; yMoving++) {
+
+                for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
                     let xMoving = x == 0 ? x : x - 1;
-                    for (; xMoving <= x + 1 && xMoving < board.cols; xMoving++) {
+                    for (; xMoving <= x + 1 && xMoving < board.rows; xMoving++) {
                         let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
                         if (selEl.bomb) {
                             counterBomb++;
@@ -81,64 +80,30 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             }
 
             let number = howManyBombsArroundClickedButton(x, y);
-            let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
-            ev.target.style.color = colors[number];
+
 
             if (number == 0) {
-                ev.target.innerHTML = number;
+                ev.target.innerHTML = 0;
+                var expand=function(){
+                    let yMoving = y === 0 ? y : y - 1;
 
-                function openNeihbours(x, y) {
-                    let neighbourX = x;
-                    let neighbourY = y;
-                    let id = neighbourX.toString() + '_' + neighbourY.toString();
-                    let neighbourButton = document.getElementById(id);
-
-                    neighbourButton.click();
-                }
-
-                function coordsinRange(x, y) {
-                    if (0 <= x && x < numberOfRows && 0 <= y && y < numberOfColumns) {
-                        return true;
-                    } else {
-                        return false;
+                    for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
+                        let xMoving = x === 0 ? x : x - 1;
+                        for (; xMoving <= x + 1 && xMoving < board.rows; xMoving++) {
+                            let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
+                            if (selEl.innerHTML) {
+                                continue;
+                            }
+                            selEl.click();
+                        }
                     }
-                }
 
-                if (coordsinRange(x - 1, y - 1)) {
-                    openNeihbours(x - 1, y - 1);
-                }
+                };
+                expand();
 
-                if (coordsinRange(x - 1, y)) {
-                    openNeihbours(x - 1, y);
-                }
-
-                if (coordsinRange(x - 1, y + 1)) {
-                    openNeihbours(x - 1, y + 1);
-                }
-
-                /*  if(coordsinRange(x, y - 1)){
-                      openNeihbours(x, y - 1);
-                  }
-  
-                  if(coordsinRange(x, y + 1)){
-                      openNeihbours(x, y + 1);
-                  }
-  
-                  if(coordsinRange(x + 1, y - 1)){
-                      openNeihbours(x + 1, y - 1);
-                  }
-  
-                  if(coordsinRange(x + 1, y)){
-                      openNeihbours(x + 1, y);
-                  }
-  
-                  if(coordsinRange(x + 1, y + 1)){
-                      openNeihbours(x + 1, y + 1);
-                  }
-                  */
-                return;
             }
-
+            let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
+            ev.target.style.color = colors[number-1];
             ev.target.innerHTML = number;
         }
     }
