@@ -10,7 +10,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let $board = $('#table');
     $board.empty();
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
-    var board = new Board(numberOfRows, numberOfColumns);
+    let board = new Board(numberOfRows, numberOfColumns);
 
     $board.append(board.createBoard());
 
@@ -24,6 +24,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     let events = new Events(); // created for events
+    let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
 
     //left click a square
@@ -34,39 +35,54 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             // this starts the timer when a click is made on the board
             // and checks if its the 1st click only
             firstTriggered = false;
-            events.startTimer('game-time'); // starts the timer
+            events.startTimer(timerContainer); // starts the timer
         }
+
         if (ev.target.bomb) {
             for (let i = 0; i < arrayOfBombs.length; i++) {
                 arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
             }
 
             alert("Game Over");
-            let timerValue = document.getElementById('game-time').childNodes[1].innerText;
 
-            events.stopTimer(); // stop the timer
-            events.openHighScoreMenu("#high-scores-btn", '#high-score-input');
+            let timerValue = timerContainer.innerText;
+            events.stopTimer(timerContainer); // stop the timer
+            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
 
-            var handleKeyDown = function (ev) {
+            let saveScore = function (ev) {
                 let enterKey = ev.which || ev.keyCode;
+                let enterTriggered = false;
                 if (enterKey === 13) { // 13 is enter
                     let storage = new Utilities();
 
-                    var name = $(this).val();
-                    var score = timerValue;
-                    storage.localStorageSet(name, score);
+                    let $name = $(this).val();
+                    let score = timerValue;
+                    // storage.localStorageSet(name, score);
 
-                    console.log('enter');
-                    console.log(name);
+                    console.log(this);
+                    console.log($name);
                     console.log(score);
-                    document.removeEventListener('keypress', handleKeyDown);
+                    console.log('-------------------------------');
 
-                    events.closeHighScoreMenu("#high-scores-btn", '#high-score-input');
+
+                    // $(this).val('');
+                    document.removeEventListener('keypress', saveScore.bind(this));
+                    enterTriggered = true;
+                } else {
+                    return;
+                }
+
+                if (enterTriggered){
+                    events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+
                 }
             };
 
             document.querySelector('#high-score-input')
-                .addEventListener('keypress', handleKeyDown);
+                .addEventListener('keypress', saveScore);
+
+
+
         } else {
             let button = ev.target;
             let x = button.coordX;
@@ -198,7 +214,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     $(window).on('hashchange', function () {
-        events.stopTimer(); // stop the timer when page is changed
+        events.stopTimer(timerContainer); // stop the timer when page is changed
     });
 }
 
