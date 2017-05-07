@@ -17,7 +17,8 @@ router
     .on('/beginner', () => newGame(10, 8, 8))
     .on('/intermediate', () => newGame(40, 16, 16))
     .on('/expert', () => newGame(99, 16, 30))
-    .on('/new-game', () => location.hash = '/beginner') //restart return to first page,see video
+
+
     .on('/highscore', () => highScore())
     .on('/help', () => help());
 //logic da se zachistqt bombite
