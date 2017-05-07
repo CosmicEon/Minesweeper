@@ -1,6 +1,7 @@
 import { Board } from '../board.js';
 import { Bombs } from '../bombs.js';
 import { Events } from '../app/events.js';
+import { Utilities } from '../app/utilities.js';
 
 
 
@@ -32,7 +33,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function squareLeftClick(ev) {
         if (ev.target.nodeName == 'BUTTON' && firstTriggered) {
             // this starts the timer when a click is made on the board
-            // and checkс its the only 1st click
+            // and checks if its the 1st click only
             firstTriggered = false;
             events.startTimer('game-time'); // starts the timer
         }
@@ -42,7 +43,31 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             }
 
             alert("Game Over");
+            let timerValue = document.getElementById('game-time').childNodes[1].innerText;
+
             events.stopTimer(); // stop the timer
+            events.openHighScoreMenu("#high-scores-btn", '#high-score-input');
+
+            var handleKeyDown = function (ev) {
+                let enterKey = ev.which || ev.keyCode;
+                if (enterKey === 13) { // 13 is enter
+                    let storage = new Utilities();
+
+                    var name = $(this).val();
+                    var score = timerValue;
+                    storage.localStorageSet(name, score);
+
+                    console.log('enter');
+                    console.log(name);
+                    console.log(score);
+                    document.removeEventListener('keypress', handleKeyDown);
+
+                    events.closeHighScoreMenu("#high-scores-btn", '#high-score-input');
+                }
+            };
+
+            document.querySelector('#high-score-input')
+                .addEventListener('keypress', handleKeyDown);
         } else {
             let button = ev.target;
             let x = button.coordX;

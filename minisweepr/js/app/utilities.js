@@ -25,8 +25,12 @@ class Utilities {
         return t;
     }
 
-    sesionStorage() {
+    localStorageSet(key, value) {
+        localStorage.setItem(key, value);
+    }
 
+    localStorageGet(key) {
+        localStorage.getItem(key);
     }
 }
 

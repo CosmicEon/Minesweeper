@@ -18,23 +18,21 @@ class Events {
 		clearInterval(this.timer);
 	}
 
-	findZoneByEvent(event) {
-		let x = event.target.getAttribute('x');
-		let y = event.target.getAttribute('y');
-		return this.board.zones[y][x];
+	openHighScoreMenu(buttonId, inputId) {
+		let $button = $(buttonId);
+		let $input = $(inputId);
+
+		$button.addClass('hidden');
+		$input.removeClass('hidden');
 	}
 
-	decreaseLeftMineCount() {
-		this.leftMineCount--;
-		this.elements.mine.textContent = this.leftMineCount;
-	}
+	closeHighScoreMenu(buttonId, inputId) {
+		let $button = $(buttonId);
+		let $input = $(inputId);
 
-	increaseLeftMineCount() {
-		this.leftMineCount++;
-		this.elements.mine.textContent = this.leftMineCount;
+		$input.addClass('hidden');
+		$button.removeClass('hidden');
 	}
-
-	//TODO add methods, fields and properties
 }
 
 export { Events };
