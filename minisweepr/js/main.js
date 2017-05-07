@@ -3,6 +3,8 @@ import 'jquery';
 import { Utilities } from './app/utilities.js';
 import { help } from './controllers/helpController.js';
 import { newGame } from './controllers/level.js';
+import { highScore } from './controllers/highScoreController.js';
+
 
 const router = new MyRouter();
 
@@ -16,6 +18,7 @@ router
     .on('/intermediate', () => newGame(40, 16, 16))
     .on('/expert', () => newGame(99, 16, 30))
     .on('/new-game', () => location.hash = '/beginner') //restart return to first page,see video
+    .on('/highscore', () => highScore())
     .on('/help', () => help());
 //logic da se zachistqt bombite
 
