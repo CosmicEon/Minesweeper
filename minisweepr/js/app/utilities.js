@@ -35,4 +35,3 @@ class Utilities {
 }
 
 export { Utilities };
-

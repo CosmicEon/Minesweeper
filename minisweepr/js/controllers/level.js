@@ -6,7 +6,9 @@ import {Utilities} from '../app/utilities.js';
 
 function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //create board
+
     let $board = $('#table');
+    $('.dropdown-menu').hide()
     $board.empty();
 
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
@@ -29,8 +31,12 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let timerValue = null;
 
     //left click a square
-    $('button').on('click', squareLeftClick);
+    $('.field').on('click', squareLeftClick);
     $('#new-game').on('click', start);
+    $('#chooseOption').on('click', function (ev) {
+        $('.dropdown-menu').show();
+    });
+
 
     function start() {
 
@@ -43,97 +49,189 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         else if (location.hash === '#/expert') {
             return newGame(99, 16, 30);
         }
-        else {}
-            //('.dropdown-menu')[0].addClass('show');}
-//TODO mush the dropdown menu appear
+        else {
+            $('.dropdown-menu').show()
         }
 
+    }
 
-        function squareLeftClick(ev) {
-            if (ev.target.nodeName == 'BUTTON' && firstTriggered) {
-                // this starts the timer when a click is made on the board
-                // and checks if its the 1st click only
-                firstTriggered = false;
-                events.startTimer('game-time'); // starts the timer
+//da se dobavq v putq //beginner/zoom
+    //2 opcii 30i 40px
+    //2 opcii za zoom out
+    //div s opciite da izliza=>eventlistener
+    //i pri izbrana opciq da te redirektva
+    //da se fokusira table v sredata da screena a ne da se scrolva
+    $('#display').on('click', ZoomIn);
+    function ZoomIn() {
+
+        $('.field').width(
+            40
+        ).height(
+            40
+        );
+    }
+
+
+    function ZoomOut(event) {
+
+        $('#table').width(
+            $('#table').width() * 0.5
+        );
+
+        $('#table').height(
+            $('#table').height() * 0.5
+        );
+    }
+
+    function showBomb() {
+        for (let i = 0; i < arrayOfBombs.length; i++) {
+            arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
+
+        }
+    }
+
+    function checkCorrectFlag() {
+        let markedAsBombFiled = $('.field.flag');
+        let isCorrect = true;
+        for (var i = 0; i < markedAsBombFiled.length; i++) {
+            if (!markedAsBombFiled[i].bomb) {
+                markedAsBombFiled[i].style.color = 'yellow';
+                markedAsBombFiled[i].value = 'X';
+                isCorrect = false;
             }
-            if (ev.target.bomb) {
-                for (let i = 0; i < arrayOfBombs.length; i++) {
-                    arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
+        }
+        return isCorrect;
+    }
+
+    function checkAllFieldAreOpen() {
+        let allFields = $('.field');
+        let isCorrect = true;
+        for (var i = 0; i < allFields.length; i++) {
+            if (allFields[i].isClicked) {
+
+                isCorrect = true;
+            }
+            else {
+                isCorrect = false
+            }
+        }
+        return isCorrect;
+
+    }
+
+    function gameOver() {
+        showBomb();
+        checkCorrectFlag();
+        alert("Game Over");
+        $('.field').off();//stops the event handlers
+
+        timerValue = timerContainer.innerText; // save current time to use it for score
+        events.stopTimer(timerContainer); // stop the timer
+        events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+    }
+
+    function winner() {
+
+
+        if (checkCorrectFlag) {
+            alert('winner winner chichken dinner');
+            timerValue = timerContainer.innerText; // save current time to use it for score
+            events.stopTimer(timerContainer); // stop the timer
+            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+
+        }
+        else {
+            return
+        }
+    }
+
+    function squareLeftClick(ev) {
+        ev.target.isClicked = true;//the button is clicked
+        if (ev.target.classList.contains('flag')) {
+            return
+        }
+
+        if (ev.target.className === 'field' && firstTriggered) {
+            // this starts the timer when a click is made on the board
+            // and checks if its the 1st click only
+            firstTriggered = false;
+            events.startTimer('game-time'); // starts the timer
+        }
+        if (ev.target.bomb) {
+            gameOver();
+
+
+        } else {
+            let button = ev.target;
+            let x = button.coordX;
+            let y = button.coordY;
+
+            if (ev.target.classList.contains('flag')) {
+                return;
+            }//can't click on a flag
+
+            function FindByAttributeValue(coordX, coordY, value, value2) {
+                let allElements = document.getElementsByClassName('field');
+                for (let i = 0; i < allElements.length; i++) {
+                    if (allElements[i].coordX === value && allElements[i].coordY === value2) {
+
+                        return allElements[i];
+                    }
                 }
+            }
 
-                alert("Game Over");
+            function howManyBombsArroundClickedButton(x, y) {
+                let counterBomb = 0;
+
+                let yMoving = y === 0 ? y : y - 1;
 
 
-                timerValue = timerContainer.innerText; // save current time to use it for score
-                events.stopTimer(timerContainer); // stop the timer
-                events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
-            } else {
-                let button = ev.target;
-                let x = button.coordX;
-                let y = button.coordY;
+                for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
+                    let xMoving = x === 0 ? x : x - 1;
+                    for (; xMoving <= x + 1 && xMoving < board.rows; xMoving++) {
+                        let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
+                        if (selEl.bomb) {
+                            counterBomb++;
 
-                if(ev.target.classList.contains('flag')){return;}//can't click on a flag
-
-                function FindByAttributeValue(coordX, coordY, value, value2) {
-                    let allElements = document.getElementsByTagName('button');
-                    for (let i = 0; i < allElements.length; i++) {
-                        if (allElements[i].coordX === value && allElements[i].coordY === value2) {
-
-                            return allElements[i];
                         }
                     }
                 }
 
-                function howManyBombsArroundClickedButton(x, y) {
-                    let counterBomb = 0;
+                return counterBomb;
+            }
 
+            let number = howManyBombsArroundClickedButton(x, y);
+
+
+            if (number === 0) {
+                ev.target.value = 0;
+                let expand = function () {
                     let yMoving = y === 0 ? y : y - 1;
 
-
                     for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
-                        let xMoving = x == 0 ? x : x - 1;
+                        let xMoving = x === 0 ? x : x - 1;
                         for (; xMoving <= x + 1 && xMoving < board.rows; xMoving++) {
                             let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
-                            if (selEl.bomb) {
-                                counterBomb++;
-
+                            if (selEl.value) {
+                                continue;
                             }
+                            //if there's already a flag should stop expanding
+                            if (selEl.classList.contains('flag')) {
+                                continue;
+                            }
+                            selEl.click();
                         }
                     }
 
-                    return counterBomb;
-                }
+                };
+                expand();
 
-                let number = howManyBombsArroundClickedButton(x, y);
-
-
-                if (number === 0) {
-                    ev.target.innerHTML = 0;
-                    let expand = function () {
-                        let yMoving = y === 0 ? y : y - 1;
-
-                        for (; yMoving <= y + 1 && yMoving < board.cols; yMoving++) {
-                            let xMoving = x === 0 ? x : x - 1;
-                            for (; xMoving <= x + 1 && xMoving < board.rows; xMoving++) {
-                                let selEl = FindByAttributeValue('coordX', 'coordY', xMoving, yMoving);
-                                if (selEl.innerHTML){
-                                    continue;
-                                }
-                                //if there's already a flag should stop expanding
-                                if(selEl.classList.contains('flag')){continue;}
-                                selEl.click();
-                            }
-                        }
-
-                    };
-                    expand();
-
-                }
-                let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
-                ev.target.style.color = colors[number - 1];
-                ev.target.innerHTML = number;
             }
+            let colors = ['red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'];
+            ev.target.style.color = colors[number - 1];
+            ev.target.value = number;
         }
+    }
 
     // event for input field
     let inputHighScore = document.querySelector('#high-score-input');
@@ -146,7 +244,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         if (ev.keyCode === 13) { // 13 is enter
             storage.localStorageSet(name, timerValue);
 
-            console.log(storage.allStorage()); // for testing
+            //console.log(storage.allStorage()); // for testing
 
             document.removeEventListener('keypress', saveScore);
             enterTriggered = true;
@@ -156,37 +254,61 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             inputHighScore.innerHTML = '';
         }
     }
+
     document.removeEventListener('keypress', saveScore);
 
 //right click a square
-        $('button').on('contextmenu', squareRightClick);
+    $('.field').on('contextmenu', squareRightClick);
 
-        function squareRightClick(ev) {
-            let flag = $('<img>');
-            flag.attr('src', '../img/flag.png');
-            flag.addClass('img');
 
-            let $target = $(ev.target);
-            ev.preventDefault();//don't show context menu
-
-            if ($target.hasClass('flag')) {
-                $target.removeClass('flag')
-                numberBombs++;
-                $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-            }  else {
-                $target.addClass('flag');
-                // $target.html('*');
-                numberBombs--;
-                $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-            }
-
-            //think to simplifie,duplicate on each controller
+    function squareRightClick(ev) {
+        ev.preventDefault();
+        if (ev.target.value) {
+            return
         }
 
-        $(window).on('hashchange', function () {
-            events.stopTimer(); // stop the timer when page is changed
-        });
+        let flag = $('<img>');
+        flag.attr('src', '../img/flag.png');
+        flag.addClass('img');
+
+        let $target = $(ev.target);
+        //don't show context menu
+
+
+        if ($target.hasClass('flag')) {
+
+            $target.isClicked = false;//unclicked the button
+            $target.removeClass('flag')
+            numberBombs++;
+            $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+        } else {
+            if (numberBombs === 0) {
+                return
+            }
+            $target.isClicked = true;//button is clicked
+            $target.addClass('flag');
+            // $target.html('*');
+            numberBombs--;
+            $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+            if (numberBombs === 0 && checkAllFieldAreOpen) {
+                if (winner) {
+                    alert('winer');
+                    showBomb('win')
+                }
+            }
+            ;
+        }
+
+        //think to simplifie,duplicate on each controller
     }
 
-    export {newGame}
+
+    $(window).on('hashchange', function () {
+        events.stopTimer(timerContainer); // stop the timer when page is changed
+        document.removeEventListener('keypress', saveScore);
+        inputHighScore.innerHTML = '';
+    });
+}
+
+export {newGame};
 

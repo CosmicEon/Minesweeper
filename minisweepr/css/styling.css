@@ -1,6 +1,13 @@
 #high-scores {
     margin-top: 17px;
 }
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
 
 .table-styles {
     background-color: #99acc6;
@@ -11,6 +18,7 @@
 .contrainer-slt {
     background-color: #D9E1E8;
     padding: 15px;
+
 }
 
 .dropdown-container {
@@ -22,9 +30,12 @@
     top: 100%;
     right: 0;
 }
+.row{
+    display: block;
+}
 
 .btn-margin {
-    margin: 10px;
+    margin: 0px;
 }
 
 .input-margin {
@@ -46,9 +57,10 @@
 }
 
 .field {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
     text-align: center;
+    object-position: top;
 
 }
 
