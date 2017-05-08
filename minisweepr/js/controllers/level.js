@@ -6,10 +6,13 @@ import {Utilities} from '../app/utilities.js';
 
 function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //create board
-
+    let events = new Events(); // created for events
     let $board = $('#table');
     $('.dropdown-menu').hide()
     $board.empty();
+    if(! $('#high-score-input').hasClass('hidden')){events.switchElementsVisibility('#high-score-input', "#high-scores-btn");}
+
+
 
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     let board = new Board(numberOfRows, numberOfColumns);
@@ -21,11 +24,10 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
     let newBombs = new Bombs();
     let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
-    for (let bomb of arrayOfBombs) {
-        bomb.bomb = true;
-    }
 
-    let events = new Events(); // created for events
+    console.log(arrayOfBombs);
+
+
     let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
     let timerValue = null;

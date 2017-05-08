@@ -10,11 +10,20 @@ class Bombs {
         for (var i = 0; i < numberOfBombs; i++) {
             let index = Math.floor(Math.random() * array.length);
             let bomb = array[index];
-            this.arrayOfBombs.push(bomb);
+
+
+            if (array[index].bomb) {
+                i--;
+              
+            } else{
+
+                bomb.bomb=true;
+                this.arrayOfBombs.push(bomb);
+            }
         }
 
         return this.arrayOfBombs;
     }
 }
 
-export { Bombs };
+export {Bombs};
