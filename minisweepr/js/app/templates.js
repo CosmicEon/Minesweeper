@@ -1,5 +1,4 @@
 import 'jquery';
-// import Handlebars from 'handlebars';
 
 
 const cachedObj = {};
@@ -21,12 +20,7 @@ function loadTemplate(templateName) {
                 reject(err);
             }
         });
-    })
-    // .then(template => {
-    //     const compiledTemplate = Handlebars.compile(template);
-    //     cachedObj[templateName] = compiledTemplate;
-    //     return Promise.resolve(compiledTemplate);
-    // });
+    });
 }
 
 
