@@ -83,7 +83,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function ZoomIn() {
         let currentHREf = location.hash;
 
-        $('.field').css("width",36);
+        $('.field').css("width", 36);
 
         $('.field').css("height", 36);
         if (currentHREf.indexOf('zoom') > 0) {
@@ -150,6 +150,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         timerValue = timerContainer.innerText; // save current time to use it for score
         timer.stopTimer();
         clearInterval(time);
+        events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
     }
 
     function winner() {
@@ -268,9 +269,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         let name = inputHighScore.value;
         clearInterval(time);
         if (ev.keyCode === 13) { // 13 is enter
-            storage.localStorageSet(name, timeSpan.innerText);
+            storage.setLocalStorage(name, timeSpan.innerText);
 
-            //console.log(storage.allStorage()); // for testing
+            //console.log(storage.getAllLocalStorage()); // for testing
 
             document.removeEventListener('keypress', saveScore);
             enterTriggered = true;
