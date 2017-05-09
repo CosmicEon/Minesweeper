@@ -93,7 +93,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         $('.field').css("width",23);
 
         $('.field').css("height", 23);
-        
+
         if (currentHREf.indexOf('zoom') < 0) {
             return
         }

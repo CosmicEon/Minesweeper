@@ -3,17 +3,17 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>#</th>
+
                 <th>Player Name</th>
                 <th>Score</th>
             </tr>
         </thead>
         <tbody>
-            {{#each archive}}
+            {{#each Storage}}
             <tr>
-                <td>{{@index}}</td>
-                <td>{{archive.name}}</td>
-                <td>{{archive.score}}</td>
+
+                <td>{{key}}</td>
+                <td>{{value}}</td>
             </tr>
             {{/each}}
         </tbody>
