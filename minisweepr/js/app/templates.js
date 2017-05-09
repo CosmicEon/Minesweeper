@@ -1,9 +1,9 @@
 import 'jquery';
-import Handlebars from 'handlebars';
+
 
 const cachedObj = {};
 
-function load(templateName) {
+function loadTemplate(templateName) {
     const url = `templates/${templateName}.handlebars`;
 
     if (cachedObj.hasOwnProperty(templateName)) {
@@ -13,22 +13,17 @@ function load(templateName) {
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: url,
-            success: function (res) {
-                resolve(res);
+            success: function (html) {
+                resolve(html);
             },
             error: function (err) {
                 reject(err);
             }
         });
-    })
-        .then(template => {
-            const compiledTemplate = Handlebars.compile(template);
-            cachedObj[templateName] = compiledTemplate;
-            return Promise.resolve(compiledTemplate);
-        });
+    });
 }
 
 
 
 
-export { load };
+export { loadTemplate };
