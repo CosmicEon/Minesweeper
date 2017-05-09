@@ -11,9 +11,17 @@ function highScore() {
         let valu = window.localStorage.getItem(sKey);
         context.push({sKey,valu});
     }
-    context.sort(function(a,b){
-        return a.valu-b.valu;
-    });
+    console.log(context)
+
+    function compare(a,b) {
+        if (a.valu < b.valu)
+            return -1;
+        if (a.valu > b.valu)
+            return 1;
+        return 0;
+    }
+
+context.sort(compare);
 
 
     load('high-score')
