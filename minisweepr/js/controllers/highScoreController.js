@@ -4,13 +4,17 @@ function highScore() {
     let $mainContainer = $('#tbl-container');
     let $tableContainer = $('#table');
 
-    let context = {};
+    let context = [];
     let i = 0,
         sKey;
     for (; sKey = window.localStorage.key(i); i++) {
-        context[sKey] = window.localStorage.getItem(sKey);
+        let valu = window.localStorage.getItem(sKey);
+        context.push({sKey,valu});
     }
-   
+    context.sort(function(a,b){
+        return a.valu-b.valu;
+    });
+
 
     load('high-score')
         .then(template => {

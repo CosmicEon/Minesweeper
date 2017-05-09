@@ -25,7 +25,7 @@ function load(templateName) {
         .then(template => {
             const compiledTemplate = Handlebars.compile(template);
             cachedObj[templateName] = compiledTemplate;
-                        return Promise.resolve(compiledTemplate);
+            return Promise.resolve(compiledTemplate);
         });
 }
 
