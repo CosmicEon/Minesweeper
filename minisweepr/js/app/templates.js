@@ -14,6 +14,7 @@ function load(templateName) {
         $.ajax({
             url: url,
             success: function (res) {
+
                 resolve(res);
             },
             error: function (err) {
@@ -24,7 +25,7 @@ function load(templateName) {
         .then(template => {
             const compiledTemplate = Handlebars.compile(template);
             cachedObj[templateName] = compiledTemplate;
-            return Promise.resolve(compiledTemplate);
+                        return Promise.resolve(compiledTemplate);
         });
 }
 
