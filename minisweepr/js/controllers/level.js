@@ -83,9 +83,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function ZoomIn() {
         let currentHREf = location.hash;
 
-        $('.field').css("width",36);
+        $('.field').css("width",33);
 
-        $('.field').css("height", 36);
+        $('.field').css("height", 33);
         if (currentHREf.indexOf('zoom') > 0) {
             return
         }
