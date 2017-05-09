@@ -101,7 +101,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         if (ev.target.bomb) {
             gameOver(arrayOfBombs);
 
+            timerValue = timerContainer.innerText; // save current time to use it for score
 
+            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
 
             timer.stopTimer();
             clearInterval(time);
@@ -188,7 +190,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         let name = inputHighScore.value;
         clearInterval(time);
         if (ev.keyCode === 13) { // 13 is enter
-            storage.localStorageSet(name, timeSpan.innerText);
+            storage.setLocalStorage(name, timeSpan.innerText);
 
             //console.log(storage.allStorage()); // for testing
 
