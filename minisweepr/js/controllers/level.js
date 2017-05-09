@@ -2,17 +2,23 @@ import {Board} from '../board.js';
 import {Bombs} from '../bombs.js';
 import {Events} from '../app/events.js';
 import {Utilities} from '../app/utilities.js';
+import {Timer} from '../timer.js';
 
+let timeSpan = document.getElementById('timer');
+let timer = new Timer();
+let time;
 
 function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //create board
+    timer.stopTimer();
+    clearInterval(time);
     let events = new Events(); // created for events
     let $board = $('#table');
     $('.dropdown-menu').hide()
     $board.empty();
-    if(! $('#high-score-input').hasClass('hidden')){events.switchElementsVisibility('#high-score-input', "#high-scores-btn");}
-
-
+    if(! $('#high-score-input').hasClass('hidden')){
+        events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+    }
 
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     let board = new Board(numberOfRows, numberOfColumns);
@@ -26,7 +32,6 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
 
     console.log(arrayOfBombs);
-
 
     let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
@@ -128,18 +133,22 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         $('.field').off();//stops the event handlers
 
         timerValue = timerContainer.innerText; // save current time to use it for score
-        events.stopTimer(timerContainer); // stop the timer
-        events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+        timer.stopTimer();
+        clearInterval(time);
+        //events.stopTimer(timerContainer); // stop the timer
+        //events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
     }
 
     function winner() {
 
 
         if (checkCorrectFlag) {
-            alert('winner winner chichken dinner');
+            alert('winner winner chicken dinner');
             timerValue = timerContainer.innerText; // save current time to use it for score
-            events.stopTimer(timerContainer); // stop the timer
-            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+            timer.stopTimer();
+            clearInterval(time);
+            //events.stopTimer(timerContainer); // stop the timer
+            //events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
 
         }
         else {
@@ -148,20 +157,24 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     }
 
     function squareLeftClick(ev) {
+        if (firstTriggered) {
+            // this starts the timer when a click is made on the board
+            // and checks if its the 1st click only
+            firstTriggered = false;
+             // starts the timer
+            timer.startTimer();
+            time = setInterval(function() {timer.startTimer()}, 1000);
+        }
         ev.target.isClicked = true;//the button is clicked
         if (ev.target.classList.contains('flag')) {
             return
         }
 
-        if (ev.target.className === 'field' && firstTriggered) {
-            // this starts the timer when a click is made on the board
-            // and checks if its the 1st click only
-            firstTriggered = false;
-            events.startTimer('game-time'); // starts the timer
-        }
+
         if (ev.target.bomb) {
             gameOver();
-
+            timer.stopTimer();
+            clearInterval(time);
 
         } else {
             let button = ev.target;
