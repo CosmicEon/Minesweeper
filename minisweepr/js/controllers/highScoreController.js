@@ -3,10 +3,10 @@ import {load} from '../app/templates.js';
 function highScore() {
     let $mainContainer = $('#tbl-container');
     let $tableContainer = $('#table');
-    let data = [];
 
 
-    console.log(data);
+
+
     load('high-score')
         .then(template => {
             console.log(template);
