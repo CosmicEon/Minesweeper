@@ -117,7 +117,8 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         let isCorrect = true;
         for (var i = 0; i < markedAsBombFiled.length; i++) {
             if (!markedAsBombFiled[i].bomb) {
-                markedAsBombFiled[i].style.color = 'yellow';
+
+                $(markedAsBombFiled[i]).css('color','yellow');
                 markedAsBombFiled[i].value = 'X';
                 isCorrect = false;
             }
@@ -316,10 +317,11 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             // $target.html('*');
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-            if (numberBombs === 0 && checkAllFieldAreOpen) {
+            if (numberBombs === 0 && checkAllFieldAreOpen()) {
                 if (winner) {
                     alert('winer');
-                    showBomb('win');
+                    showBomb();
+
                     timerValue = timerContainer.innerText; // save current time to use it for score
                     clearInterval(time);
                     events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
