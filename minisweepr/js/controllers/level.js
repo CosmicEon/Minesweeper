@@ -76,7 +76,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     //left click a square
     $('.field').on('click', squareLeftClick);
     $('#new-game').on('click', start);
-    $('#chooseOption').on('click', function (ev) {
+    $('#chooseOption').on('click', function () {
         $('.dropdown-menu').show();
     });
 
