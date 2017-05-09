@@ -69,88 +69,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let newBombs = new Bombs();
     let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
 
-<<<<<<< HEAD
-    function ZoomIn() {
-        let currentHREf = location.hash;
-
-        $('.field').css("width",33);
-
-        $('.field').css("height", 33);
-        if (currentHREf.indexOf('zoom') > 0) {
-            return
-        }
-        location.hash = currentHREf + '+zoom';
-    }
-
-    function ZoomOut() {
-        let currentHREf = location.hash;
-
-        $('.field').css("width", 23);
-
-        $('.field').css("height", 23);
-
-        if (currentHREf.indexOf('zoom') < 0) {
-            return
-        }
-        location.hash = currentHREf.slice(0, -5);
-    }
-
-    function showBomb() {
-        for (let i = 0; i < arrayOfBombs.length; i++) {
-            arrayOfBombs[i].className += ' bomb';//not jquery object to use addClass
-
-        }
-    }
-
-    function checkCorrectFlag() {
-        let markedAsBombFiled = $('.field.flag');
-        let isCorrect = true;
-        for (var i = 0; i < markedAsBombFiled.length; i++) {
-            if (!markedAsBombFiled[i].bomb) {
-
-                $(markedAsBombFiled[i]).css('color','yellow');
-                markedAsBombFiled[i].value = 'X';
-                isCorrect = false;
-            }
-        }
-        return isCorrect;
-    }
-
-    function checkAllFieldAreOpen() {
-        let allFields = $('.field');
-        let isCorrect = true;
-        for (var i = 0; i < allFields.length; i++) {
-            if (allFields[i].isClicked) {
-
-                isCorrect = true;
-            }
-            else {
-                isCorrect = false
-            }
-        }
-        return isCorrect;
-
-    }
-
-    function gameOver() {
-        showBomb();
-        checkCorrectFlag();
-        alert("Game Over");
-        $('.field').off();//stops the event handlers
-
-        timerValue = timerContainer.innerText; // save current time to use it for score
-        timer.stopTimer();
-        clearInterval(time);
-        events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
-    }
-
-    function winner() {
-
-=======
     let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
     let timerValue = null;
->>>>>>> da44c924d2fdb1988349d7b0e9f093e395ad0674
 
     //left click a square
     $('.field').on('click', squareLeftClick);
@@ -267,9 +188,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         let name = inputHighScore.value;
         clearInterval(time);
         if (ev.keyCode === 13) { // 13 is enter
-            storage.setLocalStorage(name, timeSpan.innerText);
+            storage.localStorageSet(name, timeSpan.innerText);
 
-            //console.log(storage.getAllLocalStorage()); // for testing
+            //console.log(storage.allStorage()); // for testing
 
             document.removeEventListener('keypress', saveScore);
             enterTriggered = true;
