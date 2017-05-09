@@ -159,11 +159,10 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
             alert('winner winner chicken dinner');
             timerValue = timerContainer.innerText; // save current time to use it for score
-            timer.stopTimer();
             clearInterval(time);
         }
         else {
-            return
+            return;
         }
     }
 
@@ -267,7 +266,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function saveScore(ev) {
         let enterTriggered = false;
         let name = inputHighScore.value;
-        
+        clearInterval(time);
         if (ev.keyCode === 13) { // 13 is enter
             storage.localStorageSet(name, timeSpan.innerText);
 
@@ -322,7 +321,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
                     alert('winer');
                     showBomb('win');
                     timerValue = timerContainer.innerText; // save current time to use it for score
-                    events.stopTimer(timerContainer); // stop the timer
+                    clearInterval(time);
                     events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
                 }
             }
@@ -335,6 +334,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
     $(window).on('hashchange', function () {
         clearInterval(time);
+        //events.stopTimer(timerContainer); // stop the timer when page is changed
         document.removeEventListener('keypress', saveScore);
         inputHighScore.innerHTML = '';
     });
