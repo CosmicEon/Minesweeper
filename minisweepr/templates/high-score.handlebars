@@ -3,6 +3,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>level</th>
                 <th>Player Name</th>
                 <th>Score</th>
             </tr>
@@ -10,8 +11,9 @@
         <tbody>
             {{#each .}}
             <tr>
+                <td>{{level}}</td>
                 <td>{{sKey}}</td>
-                <td>{{valu}}</td>
+                <td>{{time}}</td>
             </tr>
             {{/each}}
         </tbody>
