@@ -1,8 +1,8 @@
-import {Board} from '../board.js';
-import {Bombs} from '../bombs.js';
-import {Events} from '../app/events.js';
-import {Utilities} from '../app/utilities.js';
-import {Timer} from '../timer.js';
+import { Board } from '../board.js';
+import { Bombs } from '../bombs.js';
+import { Events } from '../app/events.js';
+import { Utilities } from '../app/utilities.js';
+import { Timer } from '../timer.js';
 
 let timeSpan = document.getElementById('timer');
 let timer = new Timer();
@@ -46,7 +46,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     });
 
     function start() {
-//TODO replace the if statements
+        //TODO replace the if statements
         if (location.hash === '#/beginner+zoom') {
 
             return (function () {
@@ -83,9 +83,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function ZoomIn() {
         let currentHREf = location.hash;
 
-        $('.field').css("width",36);
+        $('.field').css("width",33);
 
-        $('.field').css("height", 36);
+        $('.field').css("height", 33);
         if (currentHREf.indexOf('zoom') > 0) {
             return
         }
@@ -95,7 +95,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function ZoomOut() {
         let currentHREf = location.hash;
 
-        $('.field').css("width",23);
+        $('.field').css("width", 23);
 
         $('.field').css("height", 23);
 
@@ -117,7 +117,8 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         let isCorrect = true;
         for (var i = 0; i < markedAsBombFiled.length; i++) {
             if (!markedAsBombFiled[i].bomb) {
-                markedAsBombFiled[i].style.color = 'yellow';
+
+                $(markedAsBombFiled[i]).css('color','yellow');
                 markedAsBombFiled[i].value = 'X';
                 isCorrect = false;
             }
@@ -171,9 +172,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             // this starts the timer when a click is made on the board
             // and checks if its the 1st click only
             firstTriggered = false;
-             // starts the timer
+            // starts the timer
             timer.startTimer();
-            time = setInterval(function() {timer.startTimer()}, 1000);
+            time = setInterval(function () { timer.startTimer() }, 1000);
         }
         ev.target.isClicked = true;//the button is clicked
         if (ev.target.classList.contains('flag')) {
@@ -283,7 +284,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
     document.removeEventListener('keypress', saveScore);
 
-//right click a square
+    //right click a square
     $('.field').on('contextmenu', squareRightClick);
 
 
@@ -316,10 +317,11 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             // $target.html('*');
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-            if (numberBombs === 0 && checkAllFieldAreOpen) {
+            if (numberBombs === 0 && checkAllFieldAreOpen()) {
                 if (winner) {
                     alert('winer');
-                    showBomb('win');
+                    showBomb();
+
                     timerValue = timerContainer.innerText; // save current time to use it for score
                     clearInterval(time);
                     events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
@@ -340,5 +342,5 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     });
 }
 
-export {newGame};
+export { newGame };
 
