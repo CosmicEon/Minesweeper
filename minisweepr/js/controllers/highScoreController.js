@@ -1,11 +1,15 @@
-import { load } from '../app/templates.js';
+import {load} from '../app/templates.js';
 
 function highScore() {
     let $mainContainer = $('#tbl-container');
     let $tableContainer = $('#table');
+    let data = [];
 
+
+    console.log(data);
     load('high-score')
         .then(template => {
+            console.log(template);
             $mainContainer.addClass('col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2');
             $tableContainer
                 .addClass('table-styles')
@@ -19,4 +23,4 @@ function highScore() {
 
 }
 
-export { highScore };
+export {highScore};

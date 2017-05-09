@@ -13,91 +13,105 @@
 </head>
 
 <body>
-    <div class="contrainer contrainer-slt">
-        <div class="row">
-            <div class="page-header text-center">
-                <h1>Minesweeper</h1>
-            </div>
+<div class="contrainer contrainer-slt">
+    <div class="row">
+        <div class="page-header text-center">
+            <h1>Minesweeper</h1>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 text-center">
-                <a id="new-game" class="btn btn-primary btn-lg btn-margin"  role="input">New game</a>
-                <a id="display" class="btn btn-info btn-lg btn-margin" href="#/display" role="button">Display</a>
-                <a id="help" class="btn btn-info btn-lg btn-margin" href="#/help" role="button">Help</a>
-            </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 text-center">
+            <a id="new-game" class="btn btn-primary btn-lg btn-margin" role="input">New game</a>
+
+            <a id="display" class="btn btn-primary btn-lg  btn-margin" type="button"
+
+               role="button">Zoom</span>
+            </a>
+            <a id="zoomOut" class="btn btn-primary btn-lg btn-margin" type="button"
+
+               role="button">ZoomOut</span>
+            </a>
+
+            <a id="help" class="btn btn-info btn-lg btn-margin" href="#/help" role="button">Help</a>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-md-offset-3 col-sm-6 col-sx-12 text-center">
-                <div class="dropdown-container">
-                    <div class="dropdown">
-                        <a id="chooseOption" class="btn btn-primary btn-lg dropdown-toggle btn-margin" type="button" data-toggle="dropdown" href="#/choose-difficulty"
-                            role="button">Choose difficulty<span class="caret"></span>
-						</a>
-                        <ul id="options" class="dropdown-menu" role="menu">
-                            <li><a href="#/beginner">Beginner</a></li>
-                            <li><a href="#/intermediate">Intermediate </a></li>
-                            <li><a href="#/expert">Expert</a></li>
-                        </ul>
-                    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-md-offset-3 col-sm-6 col-sx-12 text-center">
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <a id="chooseOption" class="btn btn-primary btn-lg dropdown-toggle btn-margin" type="button"
+                       data-toggle="dropdown" href="#/choose-difficulty"
+                       role="button">Choose difficulty<span class="caret"></span>
+                    </a>
+                    <ul id="options" class="dropdown-menu" role="menu">
+                        <li><a href="#/beginner">Beginner</a></li>
+                        <li><a href="#/intermediate">Intermediate </a></li>
+                        <li><a href="#/expert">Expert</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-6 col-sx-12 text-center">
-                <a id="high-scores-btn" class="btn btn-info btn-lg top-buffer" href="#/highscore" role="button">HighScores</a>
-                <input id="high-score-input" class="form-control input-margin hidden" type="text" placeholder="Enter your name">
-            </div>
         </div>
 
-        <div class="row">
-            <div id="tbl-container" class="text-center">
-                <div class="row">
-                    <div class="col-lg-4 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-6 col-sx-12 text-center">
-                        <h3 id="display-bomb-number">Number of Bombs</h3>
-                    </div>
+        <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-6 col-sx-12 text-center">
+            <a id="high-scores-btn" class="btn btn-info btn-lg top-buffer" href="#/highscore"
+               role="button">HighScores</a>
+            <input id="high-score-input" class="form-control input-margin hidden" type="text"
+                   placeholder="Enter your name">
+        </div>
+    </div>
 
+    <div class="row">
+        <div id="tbl-container" class="text-center">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-6 col-sx-12 text-center">
+                    <h3 id="display-bomb-number">Number of Bombs</h3>
+                </div>
                     <div class="col-lg-2 col-md-2 col-sm-6 col-sx-12 text-center">
                         <h3 id="game-time">Time: <span id='timer'>00:00</span></h3>
                     </div>
                 </div>
+            </div>
 
-                <!--Board will be displayed below-->
-                <div id="table">
+            <!--Board will be displayed below-->
+            <div id="table">
 
-                </div>
-            </div>
-        </div>
-      
-        <!-- Share features -->
-        <div class="row footer-margin">
-            <!-- Google Plus -->
-            <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-6 col-sx-12 text-center">
-                <script src="https://apis.google.com/js/platform.js" async defer></script>
-                <div class="g-plus" data-action="share" data-height="28"></div>
-            </div>
-            <!-- Tweeter -->
-            <div class="col-lg-2 col-md-2 col-sm-6 col-sx-12 text-center">
-                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags=minesweeper" data-size="large">Tweet</a>
-            </div>
-            <!-- Facebook -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12 text-center">
-                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="recommend"
-                    data-size="large" data-show-faces="true" data-share="true"></div>
-                <div id="fb-root"></div>
             </div>
         </div>
     </div>
 
+    <!-- Share features -->
+    <div class="row footer-margin">
+        <!-- Google Plus -->
+        <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-6 col-sx-12 text-center">
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
+            <div class="g-plus" data-action="share" data-height="28"></div>
+        </div>
+        <!-- Tweeter -->
+        <div class="col-lg-2 col-md-2 col-sm-6 col-sx-12 text-center">
+            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags=minesweeper"
+               data-size="large">Tweet</a>
+        </div>
+        <!-- Facebook -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12 text-center">
+            <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard"
+                 data-action="recommend"
+                 data-size="large" data-show-faces="true" data-share="true"></div>
+            <div id="fb-root"></div>
+        </div>
+    </div>
+</div>
 
-    <!-- App start -->
-    <script>
-        System.import("main");
-    </script>
 
-    <!-- Libs -->
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- App start -->
+<script>
+    System.import("main");
+</script>
+
+<!-- Libs -->
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

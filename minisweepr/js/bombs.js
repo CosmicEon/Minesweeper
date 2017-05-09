@@ -14,7 +14,7 @@ class Bombs {
 
             if (array[index].bomb) {
                 i--;
-              
+
             } else{
 
                 bomb.bomb=true;
