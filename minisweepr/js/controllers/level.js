@@ -10,8 +10,11 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let $board = $('#table');
     $('.dropdown-menu').hide()
     $board.empty();
-    if(! $('#high-score-input').hasClass('hidden')){events.switchElementsVisibility('#high-score-input', "#high-scores-btn");}
-
+    if (!$('#high-score-input').hasClass('hidden')) {
+        events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+    }
+    $('#display').on('click', ZoomIn);
+    $('#zoomOut').on('click', ZoomOut);
 
 
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
@@ -25,8 +28,6 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     let newBombs = new Bombs();
     let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
 
-    console.log(arrayOfBombs);
-
 
     let timerContainer = document.getElementById('game-time').childNodes[1];
     let firstTriggered = true;
@@ -39,10 +40,26 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         $('.dropdown-menu').show();
     });
 
-
     function start() {
+//TODO replace the if statements
+        if (location.hash === '#/beginner+zoom') {
 
-        if (location.hash === '#/beginner') {
+            return (function () {
+                newGame(10, 8, 8);
+                ZoomIn();
+            }());
+        } else if (location.hash === '#/intermediate+zoom') {
+            return (function () {
+                newGame(40, 16, 16);
+                ZoomIn();
+            }());
+        } else if (location.hash === '#/expert+zoom') {
+            return (function () {
+                newGame(99, 16, 30);
+                ZoomIn();
+            }());
+        }
+        else if (location.hash === '#/beginner') {
             return newGame(10, 8, 8);
         }
         else if (location.hash === '#/intermediate') {
@@ -52,37 +69,35 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             return newGame(99, 16, 30);
         }
         else {
-            $('.dropdown-menu').show()
+            $('#options').show()
         }
 
     }
 
-//da se dobavq v putq //beginner/zoom
-    //2 opcii 30i 40px
-    //2 opcii za zoom out
-    //div s opciite da izliza=>eventlistener
-    //i pri izbrana opciq da te redirektva
-    //da se fokusira table v sredata da screena a ne da se scrolva
-    $('#display').on('click', ZoomIn);
-    function ZoomIn() {
 
-        $('.field').width(
-            40
-        ).height(
-            40
-        );
+    function ZoomIn() {
+        let currentHREf = location.hash;
+
+        $('.field').css("width",35);
+
+        $('.field').css("height", 35);
+        if (currentHREf.indexOf('zoom') > 0) {
+            return
+        }
+        location.hash = currentHREf + '+zoom';
     }
 
+    function ZoomOut() {
+        let currentHREf = location.hash;
 
-    function ZoomOut(event) {
+        $('.field').css("width",23);
 
-        $('#table').width(
-            $('#table').width() * 0.5
-        );
-
-        $('#table').height(
-            $('#table').height() * 0.5
-        );
+        $('.field').css("height", 23);
+        
+        if (currentHREf.indexOf('zoom') < 0) {
+            return
+        }
+        location.hash = currentHREf.slice(0, -5);
     }
 
     function showBomb() {
@@ -127,9 +142,6 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
         alert("Game Over");
         $('.field').off();//stops the event handlers
 
-        timerValue = timerContainer.innerText; // save current time to use it for score
-        events.stopTimer(timerContainer); // stop the timer
-        events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
     }
 
     function winner() {
@@ -137,9 +149,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
         if (checkCorrectFlag) {
             alert('winner winner chichken dinner');
-            timerValue = timerContainer.innerText; // save current time to use it for score
-            events.stopTimer(timerContainer); // stop the timer
-            events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
+
 
         }
         else {
@@ -295,7 +305,10 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             if (numberBombs === 0 && checkAllFieldAreOpen) {
                 if (winner) {
                     alert('winer');
-                    showBomb('win')
+                    showBomb('win');
+                    timerValue = timerContainer.innerText; // save current time to use it for score
+                    events.stopTimer(timerContainer); // stop the timer
+                    events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
                 }
             }
             ;
