@@ -267,8 +267,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     function saveScore(ev) {
         let enterTriggered = false;
         let name = inputHighScore.value;
+        
         if (ev.keyCode === 13) { // 13 is enter
-            storage.localStorageSet(name, timerValue);
+            storage.localStorageSet(name, timeSpan.innerText);
 
             //console.log(storage.allStorage()); // for testing
 
@@ -333,7 +334,7 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
 
     $(window).on('hashchange', function () {
-        events.stopTimer(timerContainer); // stop the timer when page is changed
+        clearInterval(time);
         document.removeEventListener('keypress', saveScore);
         inputHighScore.innerHTML = '';
     });
