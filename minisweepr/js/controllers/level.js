@@ -1,8 +1,10 @@
-import { Board } from '../board.js';
-import { Bombs } from '../bombs.js';
-import { Events } from '../app/events.js';
-import { Utilities } from '../app/utilities.js';
-import { Timer } from '../timer.js';
+import {Board} from '../board.js';
+import {Bombs} from '../bombs.js';
+import {Events} from '../app/events.js';
+import {Utilities} from '../app/utilities.js';
+import {Timer} from '../timer.js';
+import {winner, gameOver, checkAllFieldAreOpen} from '../game.js';
+import {zoomIn, zoomOut} from '../zoom.js';
 
 let timeSpan = document.getElementById('timer');
 let timer = new Timer();
@@ -14,54 +16,36 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     clearInterval(time);
     let events = new Events(); // created for events
     let $board = $('#table');
-    $('.dropdown-menu').hide()
     $board.empty();
-
-    if (!$('#high-score-input').hasClass('hidden')) {
-        events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
-    }
-    $('#display').on('click', ZoomIn);
-    $('#zoomOut').on('click', ZoomOut);
-
     $board.addClass('table-styles'); // added this class here because if it's static broke visually the minefield
     let board = new Board(numberOfRows, numberOfColumns);
 
+
     $board.append(board.createBoard());
+    if (!$('#high-score-input').hasClass('hidden')) {
+        events.switchElementsVisibility('#high-score-input', "#high-scores-btn");
+    }
 
-    //add bombs
-    let numberBombs = numberOfBombs;
-    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
-    let newBombs = new Bombs();
-    let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
-
-    let timerContainer = document.getElementById('game-time').childNodes[1];
-    let firstTriggered = true;
-    let timerValue = null;
-
-    //left click a square
-    $('.field').on('click', squareLeftClick);
-    $('#new-game').on('click', start);
-    $('#chooseOption').on('click', function (ev) {
-        $('.dropdown-menu').show();
-    });
-
+    $('.dropdown-menu').hide();
+    $('#display').on('click', zoomIn);
+    $('#zoomOut').on('click', zoomOut);
     function start() {
         //TODO replace the if statements
         if (location.hash === '#/beginner+zoom') {
 
             return (function () {
                 newGame(10, 8, 8);
-                ZoomIn();
+                zoomIn();
             }());
         } else if (location.hash === '#/intermediate+zoom') {
             return (function () {
                 newGame(40, 16, 16);
-                ZoomIn();
+                zoomIn();
             }());
         } else if (location.hash === '#/expert+zoom') {
             return (function () {
                 newGame(99, 16, 30);
-                ZoomIn();
+                zoomIn();
             }());
         }
         else if (location.hash === '#/beginner') {
@@ -79,7 +63,13 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
     }
 
+    //add bombs
+    let numberBombs = numberOfBombs;
+    $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
+    let newBombs = new Bombs();
+    let arrayOfBombs = newBombs.generateBombs(board.numberElements, numberBombs);
 
+<<<<<<< HEAD
     function ZoomIn() {
         let currentHREf = location.hash;
 
@@ -156,17 +146,19 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
     function winner() {
 
+=======
+    let timerContainer = document.getElementById('game-time').childNodes[1];
+    let firstTriggered = true;
+    let timerValue = null;
+>>>>>>> da44c924d2fdb1988349d7b0e9f093e395ad0674
 
-        if (checkCorrectFlag) {
+    //left click a square
+    $('.field').on('click', squareLeftClick);
+    $('#new-game').on('click', start);
+    $('#chooseOption').on('click', function () {
+        $('.dropdown-menu').show();
+    });
 
-            alert('winner winner chicken dinner');
-            timerValue = timerContainer.innerText; // save current time to use it for score
-            clearInterval(time);
-        }
-        else {
-            return;
-        }
-    }
 
     function squareLeftClick(ev) {
         if (firstTriggered) {
@@ -175,7 +167,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             firstTriggered = false;
             // starts the timer
             timer.startTimer();
-            time = setInterval(function () { timer.startTimer() }, 1000);
+            time = setInterval(function () {
+                timer.startTimer()
+            }, 1000);
         }
         ev.target.isClicked = true;//the button is clicked
         if (ev.target.classList.contains('flag')) {
@@ -184,7 +178,10 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
 
 
         if (ev.target.bomb) {
-            gameOver();
+            gameOver(arrayOfBombs);
+
+
+
             timer.stopTimer();
             clearInterval(time);
 
@@ -319,10 +316,8 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
             if (numberBombs === 0 && checkAllFieldAreOpen()) {
-                if (winner) {
-                    alert('winer');
-                    showBomb();
-
+                if (winner(arrayOfBombs)) {
+                    alert('winner');
                     timerValue = timerContainer.innerText; // save current time to use it for score
                     clearInterval(time);
                     events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
@@ -343,5 +338,5 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
     });
 }
 
-export { newGame };
+export {newGame};
 

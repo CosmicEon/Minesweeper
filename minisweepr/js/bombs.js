@@ -24,6 +24,7 @@ class Bombs {
 
         return this.arrayOfBombs;
     }
+
 }
 
 export {Bombs};
