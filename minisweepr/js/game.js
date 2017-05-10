@@ -57,4 +57,4 @@ function checkAllFieldAreOpen() {
 
 }
 
-export {winner,gameOver,checkAllFieldAreOpen};
+export {winner,gameOver,checkAllFieldAreOpen,checkCorrectFlag};

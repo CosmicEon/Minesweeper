@@ -12,7 +12,7 @@ function highScore() {
 
 
         let level = valu.slice(valu.length - 2);
-        let time = valu.slice(0, level.length);
+        let time = valu.slice(0,valu.length-2);
 
         if (level == 10) {
             level = 'beginner'

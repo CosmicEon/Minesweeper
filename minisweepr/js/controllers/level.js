@@ -3,7 +3,7 @@ import {Bombs} from '../bombs.js';
 import {Events} from '../app/events.js';
 import {Utilities} from '../app/utilities.js';
 import {Timer} from '../timer.js';
-import {winner, gameOver, checkAllFieldAreOpen} from '../game.js';
+import {winner, gameOver, checkAllFieldAreOpen,checkCorrectFlag} from '../game.js';
 import {zoomIn, zoomOut} from '../zoom.js';
 
 let timeSpan = document.getElementById('timer');
@@ -235,8 +235,9 @@ function newGame(numberOfBombs, numberOfRows, numberOfColumns) {
             numberBombs--;
             $('#display-bomb-number').html('Number of Bombs ' + numberBombs);
             if (numberBombs === 0 && checkAllFieldAreOpen()) {
-                if (winner(arrayOfBombs)) {
-                    alert('winner');
+                if (checkCorrectFlag()) {
+                    winner(arrayOfBombs);
+
                     timerValue = timerContainer.innerText; // save current time to use it for score
                     clearInterval(time);
                     events.switchElementsVisibility("#high-scores-btn", '#high-score-input');
