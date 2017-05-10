@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "minisweepr",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

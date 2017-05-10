@@ -1,4 +1,4 @@
-import { loadTemplate } from '../app/templates.js';
+import { load } from '../app/templates.js';
 import Handlebars from 'handlebars';
 
 
@@ -7,7 +7,7 @@ function help() {
     let $mainContainer = $('#tbl-container');
     let $tableContainer = $('#table');
 
-    loadTemplate('help')
+    load('help')
         .then(template => {
             const compiledTemplate = Handlebars.compile(template);
             return Promise.resolve(compiledTemplate);
