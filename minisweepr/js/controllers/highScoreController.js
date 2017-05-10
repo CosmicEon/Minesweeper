@@ -3,26 +3,55 @@ import {load} from '../app/templates.js';
 function highScore() {
     let $mainContainer = $('#tbl-container');
     let $tableContainer = $('#table');
+    let numbers = [];
 
-    let context = [];
     let i = 0,
         sKey;
     for (; sKey = window.localStorage.key(i); i++) {
         let valu = window.localStorage.getItem(sKey);
-        context.push({sKey,valu});
-    }
-    console.log(context)
 
-    function compare(a,b) {
-        if (a.valu < b.valu)
+
+        let level = valu.slice(valu.length - 2);
+        let time = valu.slice(0,valu.length-2);
+
+        if (level == 10) {
+            level = 'beginner'
+        }
+        else if (level == 40) {
+            level = 'intermediate'
+        }
+        else if(level == 99) {
+            level = 'expert'
+        }
+
+
+        let obg = {sKey, time, level};
+
+        numbers.push(obg);
+
+
+    }
+
+
+    function compare(a, b) {
+
+        if (a.level < b.level)
             return -1;
-        if (a.valu > b.valu)
+        if (a.level > b.level)
             return 1;
         return 0;
     }
+    function comparebyTime(a, b) {
 
-context.sort(compare);
+        if (a.level = b.level){
+                   if (a.time > b.time){return -1}
+            if (a.time < b.time){return 1}
 
+        return 0;}
+    }
+
+    numbers.sort(compare);
+    numbers.sort(comparebyTime);
 
     load('high-score')
         .then(template => {
@@ -30,7 +59,7 @@ context.sort(compare);
             $mainContainer.addClass('col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2');
             $tableContainer
                 .addClass('table-styles')
-                .html(template(context));
+                .html(template(numbers));
         });
 
     // when location is changed, removes css classes
