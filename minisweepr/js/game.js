@@ -30,6 +30,7 @@ function checkCorrectFlag() {
             $(markedAsBombFiled[i]).css('color','yellow');
             markedAsBombFiled[i].value = 'X';
             isCorrect = false;
+            break;
         }
     }
     return isCorrect;
@@ -50,7 +51,8 @@ function checkAllFieldAreOpen() {
             isCorrect = true;
         }
         else {
-            isCorrect = false
+            isCorrect = false;
+            break;
         }
     }
     return isCorrect;
