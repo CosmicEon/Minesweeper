@@ -1,4 +1,5 @@
 # Team-Avocado
+## Minesweeper Game 
 #### JavaScript Applications team project
 [Link to Assignment](https://github.com/TelerikAcademy/JavaScript-Applications/blob/master/Teamwork/README.md)
 
@@ -12,5 +13,5 @@
 
 ---
 
-Minesweeper Game 
+
 
